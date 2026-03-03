@@ -20,8 +20,11 @@ VOLUME /app/var/
 RUN set -eux; \
 	apt-get update; \
 	apt-get install -y --no-install-recommends \
+		acl \
 		file \
+		gettext \
 		git \
+		curl \
 	; \
 	rm -rf /var/lib/apt/lists/*; \
 	install-php-extensions \
@@ -32,6 +35,12 @@ RUN set -eux; \
 		zip \
 	;
 
+# Install Node.js and npm via NVM
+RUN mkdir -p /root/.nvm; \
+	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash; \
+	bash -i -c 'nvm install 24' && \
+	bash -i -c 'npm install -g @dbml/cli';
+
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
@@ -39,7 +48,7 @@ ENV PHP_INI_SCAN_DIR=":$PHP_INI_DIR/app.conf.d"
 
 ###> recipes ###
 ###> doctrine/doctrine-bundle ###
-RUN install-php-extensions pdo_pgsql
+RUN install-php-extensions pdo_mysql
 ###< doctrine/doctrine-bundle ###
 ###< recipes ###
 
