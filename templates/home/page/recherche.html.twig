@@ -1,0 +1,126 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche - Institut de Greffe de Foie{% endblock %}
+
+{% block body %}
+<header class="header">
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="logo">
+                <h1 class="logo-title">🏥 IGFL</h1>
+                <p class="logo-subtitle">Institut de Greffe de Foie Limoges</p>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">Accueil</a></li>
+                <li><a href="/" class="nav-link">Services</a></li>
+                <li><a href="/" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<main class="main-content">
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <h2 class="page-hero-title">🧬 Recherche Clinique</h2>
+            <p class="page-hero-subtitle">Innovation et amélioration des techniques de greffe</p>
+        </div>
+    </section>
+
+    <section class="page-content">
+        <div class="content-wrapper">
+            <h3 class="content-title">Notre engagement en recherche</h3>
+            <p class="content-text">
+                L'Institut de Greffe de Foie Limoges s'engage dans la recherche clinique et scientifique pour améliorer continuellement 
+                les techniques de transplantation, réduire les complications et augmenter la survie à long terme des greffons et des patients.
+            </p>
+
+            <h3 class="content-title">Domaines de recherche</h3>
+            <div class="research-grid">
+                <div class="research-card">
+                    <h4>🧬 Génomique et Prédiction</h4>
+                    <p>Utilisation de tests génomiques pour prédire le succès de la greffe et adapter le traitement immunosuppresseur.</p>
+                </div>
+                <div class="research-card">
+                    <h4>💊 Optimisation Immunitaire</h4>
+                    <p>Développement de nouveaux protocoles immunosuppresseurs moins toxiques avec une meilleure efficacité.</p>
+                </div>
+                <div class="research-card">
+                    <h4>🔬 Tolérance Immunologique</h4>
+                    <p>Recherche de stratégies pour induire une tolérance durable et réduire la dépendance aux médicaments.</p>
+                </div>
+                <div class="research-card">
+                    <h4>🫀 Marginal Donor</h4>
+                    <p>Amélioration de l'utilisation de greffons de donneurs marginaux pour élargir le bassin de donneurs.</p>
+                </div>
+                <div class="research-card">
+                    <h4>🤖 Perfusion Dynamique</h4>
+                    <p>Utilisation des appareils de perfusion hépatique pour améliorer la qualité des greffons.</p>
+                </div>
+                <div class="research-card">
+                    <h4>📊 Registres et Big Data</h4>
+                    <p>Analyse de grandes bases de données pour identifier de nouveaux facteurs pronostiques et optimiser les protocoles.</p>
+                </div>
+            </div>
+
+            <h3 class="content-title">Études cliniques actuelles</h3>
+            <div class="studies-container">
+                <div class="study-item">
+                    <h4>Étude ADAPT-HT</h4>
+                    <p><strong>Objectif :</strong> Évaluation d'un protocole immunosuppresseur adapté basé sur les biomarqueurs.</p>
+                    <p><strong>Statut :</strong> Recrutement en cours</p>
+                </div>
+                <div class="study-item">
+                    <h4>Étude PRECISION-TX</h4>
+                    <p><strong>Objectif :</strong> Prédiction de rejet précoce par test génomique.</p>
+                    <p><strong>Statut :</strong> Phase III</p>
+                </div>
+                <div class="study-item">
+                    <h4>Étude REGENER-HT</h4>
+                    <p><strong>Objectif :</strong> Thérapie cellulaire pour améliorer la régénération du foie.</p>
+                    <p><strong>Statut :</strong> Phase II</p>
+                </div>
+            </div>
+
+            <h3 class="content-title">Partenariats et collaborations</h3>
+            <p class="content-text">
+                Notre institut collabore avec :
+            </p>
+            <ul class="partner-list">
+                <li>Universités de recherche en transplantologie</li>
+                <li>Instituts nationaux de recherche médicale</li>
+                <li>Sociétés savantes internationales de transplantation</li>
+                <li>Laboratoires pharmaceutiques innovants</li>
+                <li>Centres de transplantation d'excellence</li>
+            </ul>
+
+            <h3 class="content-title">Participation aux études</h3>
+            <div class="participation-info">
+                <p>
+                    Si vous êtes un patient transplanté ou un candidat à la transplantation, vous pouvez être sollicité pour participer 
+                    à l'une de nos études cliniques. Votre participation volontaire contribue à l'avancement médical et à l'amélioration 
+                    de la vie de futurs patients.
+                </p>
+                <p>
+                    <strong>Tous les participants bénéficient de :</strong>
+                </p>
+                <ul class="benefit-list">
+                    <li>Suivi médical approfondi</li>
+                    <li>Accès aux technologies de pointe</li>
+                    <li>Consentement éclairé et respect de l'éthique</li>
+                    <li>Assurance supplémentaire couvrant les risques liés à l'étude</li>
+                </ul>
+            </div>
+
+            <div class="cta-container">
+                <a href="/" class="cta-button">Prendre Rendez-vous</a>
+                <a href="/" class="cta-button secondary">Retour à l'accueil</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <p>&copy; 2026 Institut de Greffe de Foie Limoges. Tous droits réservés.</p>
+</footer>
+{% endblock %}

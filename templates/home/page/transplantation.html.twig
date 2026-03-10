@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Transplantation - Institut de Greffe de Foie{% endblock %}
+
+{% block body %}
+<header class="header">
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="logo">
+                <h1 class="logo-title">🏥 IGFL</h1>
+                <p class="logo-subtitle">Institut de Greffe de Foie Limoges</p>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">Accueil</a></li>
+                <li><a href="/" class="nav-link">Services</a></li>
+                <li><a href="/" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<main class="main-content">
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <h2 class="page-hero-title">💉 Transplantation Hépatique</h2>
+            <p class="page-hero-subtitle">Chirurgie et prise en charge spécialisée</p>
+        </div>
+    </section>
+
+    <section class="page-content">
+        <div class="content-wrapper">
+            <h3 class="content-title">À propos de la transplantation hépatique</h3>
+            <p class="content-text">
+                La transplantation hépatique est une intervention chirurgicale visant à remplacer un foie malade par un foie sain 
+                provenant d'un donneur décédé ou d'un donneur vivant. C'est un traitement très efficace pour les patients atteints 
+                de maladies hépatiques terminales.
+            </p>
+
+            <h3 class="content-title">Types de transplantation</h3>
+            <div class="types-grid">
+                <div class="type-card">
+                    <h4>Greffe de Donneur Décédé</h4>
+                    <p>Transplantation du foie complet d'une personne décédée. La majorité des greffes hépatiques proviennent de donneurs décédés.</p>
+                </div>
+                <div class="type-card">
+                    <h4>Greffe de Donneur Vivant</h4>
+                    <p>Une partie du foie d'une personne vivante est transplantée. Le foie a la remarquable capacité de régénération.</p>
+                </div>
+            </div>
+
+            <h3 class="content-title">Déroulement de l'intervention</h3>
+            <div class="procedure-content">
+                <h4>Avant l'opération</h4>
+                <p>Vous recevrez des instructions spéciales sur la préparation de votre intervention. Un anesthésiste vous examinera pour évaluer les risques anesthésiques.</p>
+                
+                <h4>Pendant l'opération</h4>
+                <p>L'intervention dure généralement 4 à 8 heures. Le foie malade est retiré et remplacé par le foie sain du donneur. Après la greffe, 
+                des tests de compatibilité immédiate sont effectués.</p>
+                
+                <h4>Après l'opération</h4>
+                <p>Vous serez admis à l'unité de soins intensifs post-opératoire. Une surveillance étroite sera maintenue pendant les premiers jours 
+                et semaines suivant la greffe.</p>
+            </div>
+
+            <h3 class="content-title">Taux de succès</h3>
+            <div class="success-stats">
+                <div class="stat">
+                    <div class="stat-number">95%</div>
+                    <p>Survie du greffon à 1 an</p>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">80%</div>
+                    <p>Survie du patient à 5 ans</p>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">60%</div>
+                    <p>Survie du greffon à 10 ans</p>
+                </div>
+            </div>
+
+            <h3 class="content-title">Complications possibles</h3>
+            <ul class="complication-list">
+                <li><strong>Rejet aigu :</strong> Le système immunitaire reconnaît le foie comme étranger</li>
+                <li><strong>Rejet chronique :</strong> Développement graduel d'une dysfonction du greffon</li>
+                <li><strong>Infections :</strong> Dues à l'immunosuppression nécessaire</li>
+                <li><strong>Complications vasculaires :</strong> Thrombose ou sténose des vaisseaux</li>
+                <li><strong>Dysfonction primaire :</strong> Mauvaise fonction initiale du greffon</li>
+            </ul>
+
+            <div class="cta-container">
+                <a href="/" class="cta-button">Prendre Rendez-vous</a>
+                <a href="/" class="cta-button secondary">Retour à l'accueil</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <p>&copy; 2026 Institut de Greffe de Foie Limoges. Tous droits réservés.</p>
+</footer>
+{% endblock %}

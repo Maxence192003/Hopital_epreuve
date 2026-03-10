@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Se connecter - Institut de Greffe de Foie{% endblock %}
+
+{% block body %}
+<div class="login-container">
+    <div class="login-box">
+        <h1 class="login-title">Se connecter</h1>
+
+        {% if error %}
+            <div class="alert alert-error">
+                <p><strong>❌ Erreur de connexion!</strong></p>
+                <p>Email ou mot de passe incorrect. Veuillez réessayer.</p>
+            </div>
+        {% endif %}
+
+        <form method="post">
+            <!-- Email -->
+            <div class="form-group">
+                <label for="inputMail" class="form-label">Email</label>
+                <input type="email" id="inputMail" name="_username" class="form-input" 
+                       value="{{ last_username }}" placeholder="Entrez votre email" required autofocus>
+            </div>
+
+            <!-- Mot de passe -->
+            <div class="form-group">
+                <label for="inputPassword" class="form-label">Mot de passe</label>
+                <input type="password" id="inputPassword" name="_password" class="form-input" 
+                       placeholder="Entrez votre mot de passe" required>
+            </div>
+
+            <!-- Bouton de connexion -->
+            <button type="submit" class="login-btn">Se connecter</button>
+        </form>
+
+        <p class="login-footer">
+            Tu n'as pas de compte? 
+            <a href="#" class="login-link">Créer un compte</a>
+        </p>
+
+        <!-- Info temporaire pour le développement -->
+        <div class="dev-info">
+            <p><strong>⚠️ Info temporaire (développement):</strong></p>
+            <p>Email: <code>admin@hopital.fr</code></p>
+            <p>Mot de passe: <code>password123</code></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

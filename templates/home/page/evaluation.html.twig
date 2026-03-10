@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Évaluation - Institut de Greffe de Foie{% endblock %}
+
+{% block body %}
+<header class="header">
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="logo">
+                <h1 class="logo-title">🏥 IGFL</h1>
+                <p class="logo-subtitle">Institut de Greffe de Foie Limoges</p>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">Accueil</a></li>
+                <li><a href="/" class="nav-link">Services</a></li>
+                <li><a href="/" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<main class="main-content">
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <h2 class="page-hero-title">🔍 Évaluation Pré-greffe</h2>
+            <p class="page-hero-subtitle">Bilan complet et évaluation médicale</p>
+        </div>
+    </section>
+
+    <section class="page-content">
+        <div class="content-wrapper">
+            <h3 class="content-title">Vue d'ensemble</h3>
+            <p class="content-text">
+                L'évaluation pré-greffe est une étape cruciale et obligatoire pour tous les candidats à la transplantation hépatique. 
+                Notre équipe multidisciplinaire effectue une évaluation complète de votre état de santé général, vos capacités physiques 
+                et mentales, ainsi que votre disponibilité sociale et familiale.
+            </p>
+
+            <h3 class="content-title">Étapes de l'évaluation</h3>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h4>Consultation Initiale</h4>
+                    <p>Rencontre avec l'équipe de transplantation pour discuter de votre historique médical</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h4>Examens Biologiques</h4>
+                    <p>Analyses sanguines, sérologie, et tests de compatibilité HLA</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h4>Examens Radiologiques</h4>
+                    <p>Imagerie médicale (échographie, CT, IRM) pour évaluer l'état du foie</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h4>Évaluation Cardiaque</h4>
+                    <p>ECG et échocardiographie pour vérifier la capacité cardiaque</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">5</div>
+                    <h4>Bilan Psychosocial</h4>
+                    <p>Entretien avec un psychologue et travailleur social</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">6</div>
+                    <h4>Résultats et Décision</h4>
+                    <p>Discussion des résultats et inscription sur liste d'attente si applicable</p>
+                </div>
+            </div>
+
+            <h3 class="content-title">Documents à préparer</h3>
+            <ul class="document-list">
+                <li>Carte d'identité et document d'assurance maladie</li>
+                <li>Historique médical complet</li>
+                <li>Liste des médicaments actuels</li>
+                <li>Résultats de tests antérieurs (si disponibles)</li>
+                <li>Lettres de référence de votre médecin traitant</li>
+            </ul>
+
+            <h3 class="content-title">Durée et Coût</h3>
+            <p class="content-text">
+                L'évaluation complète s'étend généralement sur <strong>2 à 4 semaines</strong> et comprend plusieurs visites. 
+                Tous les frais d'évaluation sont couverts par votre assurance maladie.
+            </p>
+
+            <div class="cta-container">
+                <a href="/" class="cta-button">Prendre Rendez-vous</a>
+                <a href="/" class="cta-button secondary">Retour à l'accueil</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <p>&copy; 2026 Institut de Greffe de Foie Limoges. Tous droits réservés.</p>
+</footer>
+{% endblock %}

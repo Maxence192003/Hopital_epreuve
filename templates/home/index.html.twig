@@ -1,20 +1,128 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Institut de Greffe de Foie - Limoges{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<header class="header">
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="logo">
+                <h1 class="logo-title">🏥 IGFL</h1>
+                <p class="logo-subtitle">Institut de Greffe de Foie Limoges</p>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#urgence" class="nav-link">Urgence</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="{{ path('app_login') }}" class="nav-link btn-login">Se connecter</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<main class="main-content">
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2 class="hero-title">Bienvenue à l'Institut de Greffe de Foie</h2>
+            <p class="hero-subtitle">Une excellence médicale au service de votre santé</p>
+            <button class="hero-btn">Prendre Rendez-vous</button>
+        </div>
+    </section>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/app/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>/app/templates/home/index.html.twig</code></li>
-    </ul>
-</div>
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <h2 class="section-title">Nos Services</h2>
+        <div class="services-grid">
+            <a href="{{ path('app_evaluation') }}" class="service-card-link">
+                <div class="service-card">
+                    <div class="service-icon">🔍</div>
+                    <h3 class="service-title">Évaluation</h3>
+                    <p class="service-desc">Évaluation complète et bilan de transplantation hépatique</p>
+                </div>
+            </a>
+            <a href="{{ path('app_transplantation') }}" class="service-card-link">
+                <div class="service-card">
+                    <div class="service-icon">💉</div>
+                    <h3 class="service-title">Transplantation</h3>
+                    <p class="service-desc">Greffe de foie par nos équipes spécialisées</p>
+                </div>
+            </a>
+            <a href="{{ path('app_suivi') }}" class="service-card-link">
+                <div class="service-card">
+                    <div class="service-icon">👨‍⚕️</div>
+                    <h3 class="service-title">Suivi Post-greffe</h3>
+                    <p class="service-desc">Suivi médical et immunosuppression adaptée</p>
+                </div>
+            </a>
+            <a href="{{ path('app_recherche') }}" class="service-card-link">
+                <div class="service-card">
+                    <div class="service-icon">🧬</div>
+                    <h3 class="service-title">Recherche</h3>
+                    <p class="service-desc">Recherche clinique pour améliorer les techniques</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Emergency Section -->
+    <section id="urgence" class="emergency">
+        <div class="emergency-content">
+            <h2 class="emergency-title">Urgence Médicale</h2>
+            <p class="emergency-text">En cas d'urgence, contactez le <span class="emergency-number">15</span> (SAMU) ou <span class="emergency-number">112</span></p>
+            <p class="emergency-info">Notre service d'urgence fonctionne 24h/24, 7j/7</p>
+        </div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="info-section">
+        <div class="info-card">
+            <h3 class="info-title">📋 Conditions d'Accès</h3>
+            <ul class="info-list">
+                <li>Consultation sur rendez-vous</li>
+                <li>Rapport médical obligatoire</li>
+                <li>Prise en charge sociale étudié</li>
+            </ul>
+        </div>
+        <div class="info-card">
+            <h3 class="info-title">⏰ Horaires</h3>
+            <ul class="info-list">
+                <li>Lundi - Vendredi : 8h - 18h</li>
+                <li>Samedi : 9h - 13h</li>
+                <li>Urgences : 24h/24</li>
+            </ul>
+        </div>
+        <div class="info-card">
+            <h3 class="info-title">📍 Localisation</h3>
+            <ul class="info-list">
+                <li>Limoges, Haute-Vienne</li>
+                <li>CHU de Limoges</li>
+                <li>Accès routier facile</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2 class="section-title">Nous Contacter</h2>
+        <div class="contact-content">
+            <div class="contact-item">
+                <span class="contact-icon">📞</span>
+                <p>Tél : <strong>05 55 XX XX XX</strong></p>
+            </div>
+            <div class="contact-item">
+                <span class="contact-icon">✉️</span>
+                <p>Email : <strong>contact@igfl.fr</strong></p>
+            </div>
+            <div class="contact-item">
+                <span class="contact-icon">🌐</span>
+                <p>Web : <strong>www.igfl.fr</strong></p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <p>&copy; 2026 Institut de Greffe de Foie Limoges. Tous droits réservés.</p>
+</footer>
 {% endblock %}

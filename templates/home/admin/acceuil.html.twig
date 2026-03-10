@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de bord Admin - IGFL{% endblock %}
+
+{% block body %}
+<div class="admin-container">
+    <!-- Header Admin -->
+    <header class="admin-header">
+        <div class="admin-header-content">
+            <div class="admin-logo">
+                <h1>🏥 IGFL - Admin</h1>
+                <p>Tableau de bord administrateur</p>
+            </div>
+            <div class="admin-user-info">
+                <span class="admin-welcome">Bienvenue, Admin</span>
+                <a href="{{ path('app_logout') }}" class="admin-logout-btn">Se déconnecter</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+        <div class="admin-dashboard">
+            <!-- Titre de bienvenue -->
+            <section class="admin-welcome-section">
+                <h2>Tableau de bord</h2>
+                <p>Gérez les utilisateurs, les patients et les greffes de l'institut</p>
+            </section>
+
+            <!-- Grille des fonctions -->
+            <section class="admin-functions-grid">
+                
+                <!-- Gestion des Utilisateurs -->
+                <div class="admin-card">
+                    <div class="admin-card-icon">👥</div>
+                    <h3>Gestion des Utilisateurs</h3>
+                    <p>Créer, modifier ou supprimer des comptes utilisateurs</p>
+                    <button class="admin-card-btn" disabled>Bientôt disponible</button>
+                </div>
+
+                <!-- Gestion des Patients -->
+                <div class="admin-card">
+                    <div class="admin-card-icon">🏥</div>
+                    <h3>Gestion des Patients</h3>
+                    <p>Consulter et gérer les dossiers des patients</p>
+                    <button class="admin-card-btn" disabled>Bientôt disponible</button>
+                </div>
+
+                <!-- Gestion des Greffes -->
+                <div class="admin-card">
+                    <div class="admin-card-icon">💊</div>
+                    <h3>Gestion des Greffes</h3>
+                    <p>Suivre et gérer les procédures de transplantation</p>
+                    <button class="admin-card-btn" disabled>Bientôt disponible</button>
+                </div>
+
+                <!-- Rapports et Statistiques -->
+                <div class="admin-card">
+                    <div class="admin-card-icon">📊</div>
+                    <h3>Rapports et Statistiques</h3>
+                    <p>Consulter les rapports et statistiques de l'institut</p>
+                    <button class="admin-card-btn" disabled>Bientôt disponible</button>
+                </div>
+
+                <!-- Gestion des Rendez-vous -->
+                <div class="admin-card">
+                    <div class="admin-card-icon">📅</div>
+                    <h3>Gestion des Rendez-vous</h3>
+                    <p>Gérer les rendez-vous des patients</p>
+                    <button class="admin-card-btn" disabled>Bientôt disponible</button>
+                </div>
+
+                <!-- Paramètres -->
+                <div class="admin-card">
+                    <div class="admin-card-icon">⚙️</div>
+                    <h3>Paramètres</h3>
+                    <p>Configurer les paramètres du système</p>
+                    <button class="admin-card-btn" disabled>Bientôt disponible</button>
+                </div>
+
+            </section>
+
+            <!-- Footer Admin -->
+            <footer class="admin-footer">
+                <p>&copy; 2026 Institut de Greffe de Foie Limoges. Espace administrateur réservé.</p>
+            </footer>
+        </div>
+    </main>
+</div>
+{% endblock %}

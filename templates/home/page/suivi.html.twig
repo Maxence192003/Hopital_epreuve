@@ -1,0 +1,127 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Suivi Post-greffe - Institut de Greffe de Foie{% endblock %}
+
+{% block body %}
+<header class="header">
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="logo">
+                <h1 class="logo-title">🏥 IGFL</h1>
+                <p class="logo-subtitle">Institut de Greffe de Foie Limoges</p>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">Accueil</a></li>
+                <li><a href="/" class="nav-link">Services</a></li>
+                <li><a href="/" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<main class="main-content">
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <h2 class="page-hero-title">👨‍⚕️ Suivi Post-greffe</h2>
+            <p class="page-hero-subtitle">Accompagnement et surveillance long terme</p>
+        </div>
+    </section>
+
+    <section class="page-content">
+        <div class="content-wrapper">
+            <h3 class="content-title">Importance du suivi post-greffe</h3>
+            <p class="content-text">
+                Le suivi après une transplantation hépatique est essentiel pour assurer la longévité du greffon et la qualité de vie du patient. 
+                Une surveillance régulière permet de détecter précocement les complications et d'ajuster le traitement immunosuppresseur.
+            </p>
+
+            <h3 class="content-title">Immunosuppression</h3>
+            <div class="treatment-card">
+                <h4>Médicaments Immunosuppresseurs</h4>
+                <p>Après la transplantation, vous devrez prendre des médicaments immunosuppresseurs à vie pour prévenir le rejet du greffon. 
+                Ces médicaments réduisent la capacité du système immunitaire à attaquer le foie transplanté.</p>
+                <p><strong>Classes principales :</strong></p>
+                <ul class="treatment-list">
+                    <li>Inhibiteurs de calcineurine</li>
+                    <li>Antiprolifératifs</li>
+                    <li>Inhibiteurs mTOR</li>
+                    <li>Corticostéroïdes</li>
+                </ul>
+            </div>
+
+            <h3 class="content-title">Calendrier de suivi</h3>
+            <div class="follow-up-schedule">
+                <div class="schedule-item">
+                    <h4>Première semaine</h4>
+                    <p>Visites quotidiennes ou tous les deux jours à l'hôpital. Bilans sanguins réguliers.</p>
+                </div>
+                <div class="schedule-item">
+                    <h4>Premier mois</h4>
+                    <p>Visites 2 à 3 fois par semaine. Examens biologiques fréquents.</p>
+                </div>
+                <div class="schedule-item">
+                    <h4>3 à 6 mois</h4>
+                    <p>Visites hebdomadaires. Imagerie médicale selon les besoins.</p>
+                </div>
+                <div class="schedule-item">
+                    <h4>6 à 12 mois</h4>
+                    <p>Visites mensuelles. Bilans moins fréquents mais réguliers.</p>
+                </div>
+                <div class="schedule-item">
+                    <h4>Après 1 an</h4>
+                    <p>Visites tous les 3 à 6 mois selon l'évolution. Followed visite annuelle minimale.</p>
+                </div>
+            </div>
+
+            <h3 class="content-title">Examens de surveillance</h3>
+            <div class="exams-grid">
+                <div class="exam-item">
+                    <h4>Analyses Sanguines</h4>
+                    <p>Bilans hépatiques, fonction rénale, niveaux des médicaments immunosuppresseurs</p>
+                </div>
+                <div class="exam-item">
+                    <h4>Imagerie</h4>
+                    <p>Échographie hépatique, CT ou IRM selon les indications</p>
+                </div>
+                <div class="exam-item">
+                    <h4>Biopsie Hépatique</h4>
+                    <p>Si signe de rejet ou d'autres complications hépatiques</p>
+                </div>
+            </div>
+
+            <h3 class="content-title">Modes de vie recommandés</h3>
+            <div class="lifestyle-grid">
+                <div class="lifestyle-item">
+                    <span class="lifestyle-icon">🚫</span>
+                    <h4>À éviter</h4>
+                    <ul>
+                        <li>Alcool</li>
+                        <li>Tabagisme</li>
+                        <li>Stress excessif</li>
+                        <li>Aliments non sains</li>
+                    </ul>
+                </div>
+                <div class="lifestyle-item">
+                    <span class="lifestyle-icon">✅</span>
+                    <h4>À favoriser</h4>
+                    <ul>
+                        <li>Activité physique régulière</li>
+                        <li>Alimentation équilibrée</li>
+                        <li>Hygiène stricte</li>
+                        <li>Respect du traitement médical</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="cta-container">
+                <a href="/" class="cta-button">Prendre Rendez-vous</a>
+                <a href="/" class="cta-button secondary">Retour à l'accueil</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <p>&copy; 2026 Institut de Greffe de Foie Limoges. Tous droits réservés.</p>
+</footer>
+{% endblock %}
