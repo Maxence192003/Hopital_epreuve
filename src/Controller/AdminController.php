@@ -10,7 +10,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[IsGranted('ROLE_ADMIN')]
 final class AdminController extends AbstractController
 {
-    #[Route('/admin/acceuil', name: 'app_admin_acceuil')]
+    #[Route('/admin/dashboard/acceuil', name: 'app_admin_acceuil')]
     public function acceuil(): Response
     {
         return $this->render('home/admin/acceuil.html.twig');

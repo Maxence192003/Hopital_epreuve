@@ -1,0 +1,81 @@
+{% extends '@admin/layout.html.twig' %}
+
+{% block content_title %}
+    Gestion des Utilisateurs
+{% endblock %}
+
+{% block main %}
+<div class="container mt-5">
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h2>Liste des Utilisateurs</h2>
+        </div>
+        <div class="col-md-6 text-end">
+            <a href="{{ path('admin_utilisateur_creer') }}" class="btn btn-primary">+ Ajouter Utilisateur</a>
+        </div>
+    </div>
+
+    {% if utilisateurs|length == 0 %}
+        <div class="alert alert-info">
+            Aucun utilisateur créé. <a href="{{ path('admin_utilisateur_creer') }}">Créer le premier utilisateur</a>
+        </div>
+    {% else %}
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Ville</th>
+                        <th>Code Postal</th>
+                        <th>Email</th>
+                        <th>Rôle</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for utilisateur in utilisateurs %}
+                    <tr>
+                        <td>{{ utilisateur.nom }}</td>
+                        <td>{{ utilisateur.prenom }}</td>
+                        <td>{{ utilisateur.villeRes }}</td>
+                        <td>{{ utilisateur.CP }}</td>
+                        <td>{{ utilisateur.login.mail }}</td>
+                        <td>
+                            {% if utilisateur.profils|length > 0 %}
+                                <span class="badge bg-info">{{ utilisateur.profils.first.role }}</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="btn-group btn-group-sm" role="group">
+                                <a href="{{ path('admin_utilisateur_voir', {id: utilisateur.idUtilisateur}) }}" class="btn btn-info" title="Voir">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="{{ path('admin_utilisateur_modifier', {id: utilisateur.idUtilisateur}) }}" class="btn btn-warning" title="Modifier">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <form method="POST" action="{{ path('admin_utilisateur_supprimer', {id: utilisateur.idUtilisateur}) }}" style="display: inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">
+                                    <button type="submit" class="btn btn-danger btn-sm" title="Supprimer">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+</div>
+
+<style>
+    .btn-group-sm {
+        gap: 0.25rem;
+    }
+    
+    .table-hover tbody tr:hover {
+        background-color: #f5f5f5;
+    }
+</style>
+{% endblock %}

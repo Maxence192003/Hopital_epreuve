@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: LoginRepository::class)]
 class Login implements UserInterface, PasswordAuthenticatedUserInterface
@@ -18,9 +19,13 @@ class Login implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id_login = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message: 'L\'email ne peut pas être vide')]
+    #[Assert\Email(message: 'L\'email doit être valide')]
     private ?string $Mail = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Le mot de passe ne peut pas être vide')]
+    #[Assert\Length(min: 6, minMessage: 'Le mot de passe doit faire au moins 6 caractères')]
     private ?string $Password = null;
 
     #[ORM\OneToMany(mappedBy: 'login', targetEntity: Utilisateur::class)]

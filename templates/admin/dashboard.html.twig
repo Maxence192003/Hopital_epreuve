@@ -1,0 +1,58 @@
+{% extends '@EasyAdmin/layout.html.twig' %}
+
+{% block content_title %}
+    Tableau de bord
+{% endblock %}
+
+{% block main %}
+<div class="admin-dashboard-container">
+    <header class="admin-header">
+        <div class="admin-header-content">
+            <div class="admin-logo">
+                <h1>🏥 IGFL - EasyAdmin Dashboard</h1>
+                <p>Interface d'administration centralisée</p>
+            </div>
+            <div class="admin-user-info">
+                <span class="admin-welcome">Bienvenue, Admin</span>
+                <a href="{{ path('app_logout') }}" class="admin-logout-btn">Se déconnecter</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="admin-main">
+        <div class="admin-content">
+            <section class="admin-welcome-section">
+                <h2>Tableau de bord EasyAdmin</h2>
+                <p>Utilisez le menu de gauche pour accéder aux différentes entités :</p>
+            </section>
+
+            <section class="admin-info">
+                <div class="info-card">
+                    <h3>📝 Gestion des Logins</h3>
+                    <p>Créer et gérer les comptes d'accès (email + mot de passe)</p>
+                </div>
+
+                <div class="info-card">
+                    <h3>👥 Gestion des Utilisateurs</h3>
+                    <p>Créer les utilisateurs avec données civiles, lié à un Login et attribuer des Profils</p>
+                </div>
+
+                <div class="info-card">
+                    <h3>🏷️ Gestion des Profils</h3>
+                    <p>Gérer les rôles et permissions des utilisateurs</p>
+                </div>
+
+                <div class="info-card">
+                    <h3>🏥 Gestion des Patients</h3>
+                    <p>Consulter et gérer les dossiers des patients</p>
+                </div>
+
+                <div class="info-card">
+                    <h3>💊 Gestion des Greffes</h3>
+                    <p>Suivre et gérer les procédures de transplantation</p>
+                </div>
+            </section>
+        </div>
+    </main>
+</div>
+{% endblock %}

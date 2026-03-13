@@ -1,0 +1,6 @@
+easy_admin:
+    entities:
+        Login:
+            controller: App\Controller\Admin\LoginCrudController
+        Profil:
+            controller: App\Controller\Admin\ProfilCrudController

@@ -1,0 +1,120 @@
+{% extends '@admin/layout.html.twig' %}
+
+{% block content_title %}
+    Détails de l'Utilisateur
+{% endblock %}
+
+{% block main %}
+<div class="container mt-5">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2>Détails de {{ utilisateur.prenom }} {{ utilisateur.nom }}</h2>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="{{ path('admin_utilisateur_modifier', {id: utilisateur.idUtilisateur}) }}" class="btn btn-warning">
+                <i class="fas fa-edit"></i> Modifier
+            </a>
+            <a href="{{ path('admin_utilisateur_liste') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Retour
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Informations Civiles</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <strong>ID :</strong><br>
+                            <span class="badge bg-secondary">{{ utilisateur.idUtilisateur }}</span>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Nom :</strong><br>
+                            {{ utilisateur.nom }}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <strong>Prénom :</strong><br>
+                            {{ utilisateur.prenom }}
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Ville :</strong><br>
+                            {{ utilisateur.villeRes }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <strong>Code Postal :</strong><br>
+                            {{ utilisateur.CP }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Authentification</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <strong>Email :</strong><br>
+                            <code>{{ utilisateur.login.mail }}</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">Rôles et Permissions</h5>
+                </div>
+                <div class="card-body">
+                    {% if utilisateur.profils|length > 0 %}
+                        {% for profil in utilisateur.profils %}
+                        <div class="mb-2">
+                            <span class="badge bg-primary">{{ profil.role }}</span>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="text-muted">Aucun rôle assigné</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-8">
+            <a href="{{ path('admin_utilisateur_index') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Retour à la liste
+            </a>
+            <a href="{{ path('admin_utilisateur_modifier', {id: utilisateur.idUtilisateur}) }}" class="btn btn-warning">
+                <i class="fas fa-edit"></i> Modifier
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        border-left: 4px solid #667eea;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .card-header {
+        border-bottom: 2px solid #e9ecef;
+    }
+    
+    code {
+        background-color: #f5f5f5;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+    }
+</style>
+{% endblock %}

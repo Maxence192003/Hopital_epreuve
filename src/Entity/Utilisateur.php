@@ -6,6 +6,7 @@ use App\Repository\UtilisateurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
 class Utilisateur
@@ -16,15 +17,19 @@ class Utilisateur
     private ?int $id_utilisateur = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message: 'Le nom ne peut pas être vide')]
     private ?string $Nom = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message: 'Le prénom ne peut pas être vide')]
     private ?string $Prenom = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message: 'La ville ne peut pas être vide')]
     private ?string $Ville_res = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message: 'Le code postal ne peut pas être vide')]
     private ?string $CP = null;
 
     #[ORM\ManyToOne(targetEntity: DossierPatient::class, inversedBy: 'utilisateurs')]
@@ -33,9 +38,11 @@ class Utilisateur
 
     #[ORM\ManyToOne(targetEntity: Login::class, inversedBy: 'utilisateurs')]
     #[ORM\JoinColumn(name: 'id_login', referencedColumnName: 'id_login', nullable: false)]
+    #[Assert\NotNull(message: 'Un utilisateur doit avoir un login')]
     private ?Login $login = null;
 
-    #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: Profil::class)]
+    #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: Profil::class, cascade: ['remove'])]
+    #[Assert\Count(min: 1, minMessage: 'Un utilisateur doit avoir au moins un profil')]
     private Collection $profils;
 
     public function __construct()
