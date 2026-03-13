@@ -128,3 +128,4 @@ class Login implements UserInterface, PasswordAuthenticatedUserInterface
         // Efface les données sensibles si besoin
     }
 }
+

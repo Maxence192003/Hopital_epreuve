@@ -1273,3 +1273,403 @@ html {
         padding: 20px 10px;
     }
 }
+
+/* ===== MEDECIN DASHBOARD STYLES ===== */
+.medecin-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f5f7fa;
+}
+
+/* Medecin Header */
+.medecin-header {
+    background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+    color: white;
+    padding: 20px 0;
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.15);
+}
+
+.medecin-header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.medecin-logo h1 {
+    font-size: 1.8rem;
+    margin: 0;
+    font-weight: 700;
+}
+
+.medecin-logo p {
+    margin: 2px 0 0 0;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.medecin-user-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.medecin-welcome {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.medecin-logout-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.medecin-logout-btn:hover {
+    background-color: #c82333;
+}
+
+/* Main Content */
+.medecin-main {
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    width: 100%;
+}
+
+.medecin-dashboard {
+    width: 100%;
+}
+
+.medecin-welcome-section {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.medecin-welcome-section h2 {
+    font-size: 2rem;
+    color: #28a745;
+    margin: 0 0 10px 0;
+    font-weight: 700;
+}
+
+.medecin-welcome-section p {
+    font-size: 1.1rem;
+    color: #666;
+    margin: 0;
+}
+
+/* Functions Grid */
+.medecin-functions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin: 40px 0;
+}
+
+.medecin-card {
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    text-align: center;
+    border: 2px solid #d4edda;
+}
+
+.medecin-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(40, 167, 69, 0.15);
+    border-color: #28a745;
+}
+
+.medecin-card-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.medecin-card h3 {
+    color: #28a745;
+    font-size: 1.2rem;
+    margin: 10px 0;
+    font-weight: 600;
+}
+
+.medecin-card p {
+    color: #666;
+    font-size: 0.95rem;
+    margin: 0 0 20px 0;
+    line-height: 1.5;
+}
+
+.medecin-card-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.95rem;
+}
+
+.medecin-card-btn:hover:not(:disabled) {
+    background-color: #1e7e34;
+    transform: scale(1.05);
+}
+
+.medecin-card-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Footer */
+.medecin-footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: 40px;
+    border-top: 1px solid #e0e0e0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .medecin-header-content {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .medecin-user-info {
+        justify-content: center;
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .medecin-functions-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .medecin-welcome-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .medecin-main {
+        padding: 20px 10px;
+    }
+}
+
+/* ===== PATIENT DASHBOARD STYLES ===== */
+.patient-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f5f7fa;
+}
+
+/* Patient Header */
+.patient-header {
+    background: linear-gradient(135deg, #ff9800 0%, #e68900 100%);
+    color: white;
+    padding: 20px 0;
+    box-shadow: 0 4px 12px rgba(255, 152, 0, 0.15);
+}
+
+.patient-header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.patient-logo h1 {
+    font-size: 1.8rem;
+    margin: 0;
+    font-weight: 700;
+}
+
+.patient-logo p {
+    margin: 2px 0 0 0;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.patient-user-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.patient-welcome {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.patient-logout-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.patient-logout-btn:hover {
+    background-color: #c82333;
+}
+
+/* Main Content */
+.patient-main {
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    width: 100%;
+}
+
+.patient-dashboard {
+    width: 100%;
+}
+
+.patient-welcome-section {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.patient-welcome-section h2 {
+    font-size: 2rem;
+    color: #ff9800;
+    margin: 0 0 10px 0;
+    font-weight: 700;
+}
+
+.patient-welcome-section p {
+    font-size: 1.1rem;
+    color: #666;
+    margin: 0;
+}
+
+/* Functions Grid */
+.patient-functions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin: 40px 0;
+}
+
+.patient-card {
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    text-align: center;
+    border: 2px solid #ffe0b2;
+}
+
+.patient-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(255, 152, 0, 0.15);
+    border-color: #ff9800;
+}
+
+.patient-card-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.patient-card h3 {
+    color: #ff9800;
+    font-size: 1.2rem;
+    margin: 10px 0;
+    font-weight: 600;
+}
+
+.patient-card p {
+    color: #666;
+    font-size: 0.95rem;
+    margin: 0 0 20px 0;
+    line-height: 1.5;
+}
+
+.patient-card-btn {
+    background-color: #ff9800;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.95rem;
+}
+
+.patient-card-btn:hover:not(:disabled) {
+    background-color: #e68900;
+    transform: scale(1.05);
+}
+
+.patient-card-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Footer */
+.patient-footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: 40px;
+    border-top: 1px solid #e0e0e0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .patient-header-content {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .patient-user-info {
+        justify-content: center;
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .patient-functions-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .patient-welcome-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .patient-main {
+        padding: 20px 10px;
+    }
+}

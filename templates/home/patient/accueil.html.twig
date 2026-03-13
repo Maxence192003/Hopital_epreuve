@@ -1,0 +1,74 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Tableau de bord Patient - IGFL{% endblock %}
+
+{% block body %}
+<div class="patient-container">
+    <!-- Header Patient -->
+    <header class="patient-header">
+        <div class="patient-header-content">
+            <div class="patient-logo">
+                <h1>🏥 IGFL - Patient</h1>
+                <p>Tableau de bord patient</p>
+            </div>
+            <div class="patient-user-info">
+                <span class="patient-welcome">Bienvenue, {{ patient.prenom }} {{ patient.nom|upper }}</span>
+                <a href="{{ path('app_logout') }}" class="patient-logout-btn">Se déconnecter</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="patient-main">
+        <div class="patient-dashboard">
+            <!-- Titre de bienvenue -->
+            <section class="patient-welcome-section">
+                <h2>Mon Espace Patient</h2>
+                <p>Gérez votre dossier médical et vos rendez-vous</p>
+            </section>
+
+            <!-- Grille des fonctions -->
+            <section class="patient-functions-grid">
+                
+                <!-- Mon Dossier Médical -->
+                <div class="patient-card">
+                    <div class="patient-card-icon">📋</div>
+                    <h3>Mon Dossier</h3>
+                    <p>Consultez votre dossier médical complet</p>
+                    <a href="#" class="patient-card-btn">Accéder</a>
+                </div>
+
+                <!-- Mes Rendez-vous -->
+                <div class="patient-card">
+                    <div class="patient-card-icon">📅</div>
+                    <h3>Rendez-vous</h3>
+                    <p>Consultez et gérez vos rendez-vous médicaux</p>
+                    <a href="#" class="patient-card-btn">Accéder</a>
+                </div>
+
+                <!-- Mon Médecin -->
+                <div class="patient-card">
+                    <div class="patient-card-icon">👨‍⚕️</div>
+                    <h3>Mon Médecin</h3>
+                    <p>Contactez votre médecin traitant</p>
+                    <button class="patient-card-btn" disabled>Bientôt disponible</button>
+                </div>
+
+                <!-- Mes Résultats -->
+                <div class="patient-card">
+                    <div class="patient-card-icon">🧪</div>
+                    <h3>Résultats Medicaux</h3>
+                    <p>Consultez vos résultats d'examens médicaux</p>
+                    <button class="patient-card-btn" disabled>Bientôt disponible</button>
+                </div>
+
+            </section>
+
+            <!-- Footer Patient -->
+            <footer class="patient-footer">
+                <p>&copy; 2026 Institut de Greffe de Foie Limoges. Espace patient réservé.</p>
+            </footer>
+        </div>
+    </main>
+</div>
+{% endblock %}
