@@ -1,0 +1,61 @@
+<?php
+
+namespace App\Command;
+
+use App\Entity\Login;
+use App\Entity\Utilisateur;
+use App\Entity\Profil;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactory;
+
+#[AsCommand(name: 'app:create-admin')]
+final class CreateAdminCommand extends Command
+{
+    public function __construct(private EntityManagerInterface $entityManager)
+    {
+        parent::__construct();
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output): int
+    {
+        // Hash the password
+        $hasher = password_hash('password123', PASSWORD_BCRYPT, ['cost' => 12]);
+        
+        // Create Login
+        $login = new Login();
+        $login->setMail('admin@hopital.fr');
+        $login->setPassword($hasher);
+        
+        // Create Utilisateur
+        $utilisateur = new Utilisateur();
+        $utilisateur->setNom('Admin');
+        $utilisateur->setPrenom('Admin');
+        $utilisateur->setVilleRes('Limoges');
+        $utilisateur->setCP('87000');
+        $utilisateur->setLogin($login);
+        $login->addUtilisateur($utilisateur);
+        
+        // Create Profil
+        $profil = new Profil();
+        $profil->setRole('ROLE_ADMIN');
+        $profil->setUtilisateur($utilisateur);
+        $utilisateur->addProfil($profil);
+        
+        // Persist
+        $this->entityManager->persist($login);
+        $this->entityManager->persist($utilisateur);
+        $this->entityManager->persist($profil);
+        $this->entityManager->flush();
+        
+        $output->writeln('Admin user created successfully!');
+        $output->writeln('Email: admin@hopital.fr');
+        $output->writeln('Password: password123');
+        $output->writeln('Password hash: ' . $hasher);
+        
+        return Command::SUCCESS;
+    }
+}

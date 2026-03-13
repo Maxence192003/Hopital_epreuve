@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\LoginRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -15,15 +17,19 @@ class Login implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id_login = null;
 
-    #[ORM\Column(length: 100, unique: true)]
+    #[ORM\Column(length: 50)]
     private ?string $Mail = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 50)]
     private ?string $Password = null;
 
-    #[ORM\OneToOne(inversedBy: 'login', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(name: 'id_utilisateur', referencedColumnName: 'id_utilisateur', nullable: false)]
-    private ?Utilisateur $utilisateur = null;
+    #[ORM\OneToMany(mappedBy: 'login', targetEntity: Utilisateur::class)]
+    private Collection $utilisateurs;
+
+    public function __construct()
+    {
+        $this->utilisateurs = new ArrayCollection();
+    }
 
     public function getIdLogin(): ?int
     {
@@ -54,14 +60,31 @@ class Login implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getUtilisateur(): ?Utilisateur
+    /**
+     * @return Collection<int, Utilisateur>
+     */
+    public function getUtilisateurs(): Collection
     {
-        return $this->utilisateur;
+        return $this->utilisateurs;
     }
 
-    public function setUtilisateur(?Utilisateur $utilisateur): static
+    public function addUtilisateur(Utilisateur $utilisateur): static
     {
-        $this->utilisateur = $utilisateur;
+        if (!$this->utilisateurs->contains($utilisateur)) {
+            $this->utilisateurs->add($utilisateur);
+            $utilisateur->setLogin($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUtilisateur(Utilisateur $utilisateur): static
+    {
+        if ($this->utilisateurs->removeElement($utilisateur)) {
+            if ($utilisateur->getLogin() === $this) {
+                $utilisateur->setLogin(null);
+            }
+        }
 
         return $this;
     }
@@ -74,14 +97,22 @@ class Login implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getRoles(): array
     {
-        $roles = ['ROLE_USER'];
+        $roles = [];
         
-        // Ajoute le rôle du profil si l'utilisateur existe
-        if ($this->utilisateur && $this->utilisateur->getProfil()) {
-            $profil = $this->utilisateur->getProfil()->getRole();
-            if ($profil && !in_array($profil, $roles)) {
-                $roles[] = $profil;
+        // Récupère tous les utilisateurs associés à ce login
+        foreach ($this->utilisateurs as $utilisateur) {
+            // Récupère tous les profils de cet utilisateur
+            foreach ($utilisateur->getProfils() as $profil) {
+                $role = $profil->getRole();
+                if ($role && !in_array($role, $roles)) {
+                    $roles[] = $role;
+                }
             }
+        }
+        
+        // Ajoute ROLE_USER par défaut
+        if (empty($roles)) {
+            $roles[] = 'ROLE_USER';
         }
 
         return $roles;

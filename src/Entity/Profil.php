@@ -16,7 +16,8 @@ class Profil
     #[ORM\Column(length: 50)]
     private ?string $Role = null;
 
-    #[ORM\OneToOne(mappedBy: 'profil', cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(targetEntity: Utilisateur::class, inversedBy: 'profils')]
+    #[ORM\JoinColumn(name: 'id_utilisateur', referencedColumnName: 'id_utilisateur', nullable: false)]
     private ?Utilisateur $utilisateur = null;
 
     public function getIdProfil(): ?int
@@ -43,13 +44,6 @@ class Profil
 
     public function setUtilisateur(?Utilisateur $utilisateur): static
     {
-        if ($utilisateur === null && $this->utilisateur !== null) {
-            $this->utilisateur->setProfil(null);
-        }
-        if ($utilisateur !== null && $utilisateur->getProfil() !== $this) {
-            $utilisateur->setProfil($this);
-        }
-
         $this->utilisateur = $utilisateur;
 
         return $this;

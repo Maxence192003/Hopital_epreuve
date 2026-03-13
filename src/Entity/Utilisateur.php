@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UtilisateurRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
@@ -13,24 +15,33 @@ class Utilisateur
     #[ORM\Column]
     private ?int $id_utilisateur = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 50)]
     private ?string $Nom = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 50)]
     private ?string $Prenom = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 50)]
     private ?string $Ville_res = null;
 
-    #[ORM\Column(length: 10)]
+    #[ORM\Column(length: 50)]
     private ?string $CP = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(name: 'id_profil', referencedColumnName: 'id_profil', nullable: false)]
-    private ?Profil $profil = null;
+    #[ORM\ManyToOne(targetEntity: DossierPatient::class, inversedBy: 'utilisateurs')]
+    #[ORM\JoinColumn(name: 'id_dossier_patient', referencedColumnName: 'id_dossier_patient', nullable: true)]
+    private ?DossierPatient $dossierPatient = null;
 
-    #[ORM\OneToOne(mappedBy: 'utilisateur', cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(targetEntity: Login::class, inversedBy: 'utilisateurs')]
+    #[ORM\JoinColumn(name: 'id_login', referencedColumnName: 'id_login', nullable: false)]
     private ?Login $login = null;
+
+    #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: Profil::class)]
+    private Collection $profils;
+
+    public function __construct()
+    {
+        $this->profils = new ArrayCollection();
+    }
 
     public function getIdUtilisateur(): ?int
     {
@@ -42,7 +53,7 @@ class Utilisateur
         return $this->Nom;
     }
 
-    public function setNom(string $Nom): static
+    public function setNom(?string $Nom): static
     {
         $this->Nom = $Nom;
 
@@ -54,7 +65,7 @@ class Utilisateur
         return $this->Prenom;
     }
 
-    public function setPrenom(string $Prenom): static
+    public function setPrenom(?string $Prenom): static
     {
         $this->Prenom = $Prenom;
 
@@ -66,7 +77,7 @@ class Utilisateur
         return $this->Ville_res;
     }
 
-    public function setVilleRes(string $Ville_res): static
+    public function setVilleRes(?string $Ville_res): static
     {
         $this->Ville_res = $Ville_res;
 
@@ -78,21 +89,21 @@ class Utilisateur
         return $this->CP;
     }
 
-    public function setCP(string $CP): static
+    public function setCP(?string $CP): static
     {
         $this->CP = $CP;
 
         return $this;
     }
 
-    public function getProfil(): ?Profil
+    public function getDossierPatient(): ?DossierPatient
     {
-        return $this->profil;
+        return $this->dossierPatient;
     }
 
-    public function setProfil(?Profil $profil): static
+    public function setDossierPatient(?DossierPatient $dossierPatient): static
     {
-        $this->profil = $profil;
+        $this->dossierPatient = $dossierPatient;
 
         return $this;
     }
@@ -104,14 +115,36 @@ class Utilisateur
 
     public function setLogin(?Login $login): static
     {
-        if ($login === null && $this->login !== null) {
-            $this->login->setUtilisateur(null);
-        }
-        if ($login !== null && $login->getUtilisateur() !== $this) {
-            $login->setUtilisateur($this);
+        $this->login = $login;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Profil>
+     */
+    public function getProfils(): Collection
+    {
+        return $this->profils;
+    }
+
+    public function addProfil(Profil $profil): static
+    {
+        if (!$this->profils->contains($profil)) {
+            $this->profils->add($profil);
+            $profil->setUtilisateur($this);
         }
 
-        $this->login = $login;
+        return $this;
+    }
+
+    public function removeProfil(Profil $profil): static
+    {
+        if ($this->profils->removeElement($profil)) {
+            if ($profil->getUtilisateur() === $this) {
+                $profil->setUtilisateur(null);
+            }
+        }
 
         return $this;
     }

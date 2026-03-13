@@ -26,6 +26,14 @@ class LoginRepository extends ServiceEntityRepository
 
     public function findOneByMail(string $mail): ?Login
     {
-        return $this->findOneBy(['Mail' => $mail]);
+        return $this->createQueryBuilder('l')
+            ->leftJoin('l.utilisateurs', 'u')
+            ->addSelect('u')
+            ->leftJoin('u.profils', 'p')
+            ->addSelect('p')
+            ->where('l.Mail = :mail')
+            ->setParameter('mail', $mail)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 }
