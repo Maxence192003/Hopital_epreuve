@@ -20,7 +20,7 @@ class Login implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 50)]
     private ?string $Mail = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 255)]
     private ?string $Password = null;
 
     #[ORM\OneToMany(mappedBy: 'login', targetEntity: Utilisateur::class)]
