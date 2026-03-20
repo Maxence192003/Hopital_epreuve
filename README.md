@@ -1,51 +1,173 @@
-# Symfony Docker
+# 🏥 IGFL - Système de Gestion Hospitalier
 
-A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony](https://symfony.com) web framework,
-with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) inside!
+Application web Symfony pour la gestion des patients, dossiers médicaux et greffes de foie au sein de l'Institut de Greffe de Foie Limoges.
 
-![CI](https://github.com/dunglas/symfony-docker/workflows/CI/badge.svg)
+## 📋 Description
 
-## Getting Started
+Plateforme hospitalière complète permettant :
+- **Administrateurs** : Gestion centralisée des utilisateurs, patients, profils et permissions
+- **Médecins** : Consultation des patients, gestion des dossiers, enregistrement des consultations et greffes
+- **Patients** : Accès à leurs dossiers et historique médical
 
-1. If not already done, [install Docker Compose](https://docs.docker.com/compose/install/) (v2.10+)
-2. Run `docker compose build --pull --no-cache` to build fresh images
-3. Run `docker compose up --wait` to set up and start a fresh Symfony project
-4. Open `https://localhost` in your favorite web browser and [accept the auto-generated TLS certificate](https://stackoverflow.com/a/15076602/1352334)
-5. Run `docker compose down --remove-orphans` to stop the Docker containers.
+## 🚀 Démarrage Rapide
 
-## Features
+### Prérequis
+- [Docker Compose](https://docs.docker.com/compose/install/) (v2.10+)
+- Docker et Docker Desktop
 
-- Production, development and CI ready
-- Just 1 service by default
-- Blazing-fast performance thanks to [the worker mode of FrankenPHP](https://frankenphp.dev/docs/worker/)
-- [Installation of extra Docker Compose services](docs/extra-services.md) with Symfony Flex
-- Automatic HTTPS (in dev and prod)
-- HTTP/3 and [Early Hints](https://symfony.com/blog/new-in-symfony-6-3-early-hints) support
-- Real-time messaging thanks to a built-in [Mercure hub](https://symfony.com/doc/current/mercure.html)
-- [Vulcain](https://vulcain.rocks) support
-- Native [XDebug](docs/xdebug.md) integration
-- Super-readable configuration
+### Installation et Lancement
 
-**Enjoy!**
+```bash
+# 1. Construire les images Docker
+docker compose build --pull --no-cache
 
-## Docs
+# 2. Lancer l'application
+docker compose up --wait
 
-1. [Options available](docs/options.md)
-2. [Using Symfony Docker with an existing project](docs/existing-project.md)
-3. [Support for extra services](docs/extra-services.md)
-4. [Deploying in production](docs/production.md)
-5. [Debugging with Xdebug](docs/xdebug.md)
-6. [TLS Certificates](docs/tls.md)
-7. [Using MySQL instead of PostgreSQL](docs/mysql.md)
-8. [Using Alpine Linux instead of Debian](docs/alpine.md)
-9. [Using a Makefile](docs/makefile.md)
-10. [Updating the template](docs/updating.md)
-11. [Troubleshooting](docs/troubleshooting.md)
+# 3. Accéder à l'application
+# Ouvrir https://localhost dans votre navigateur
+# Accepter le certificat TLS auto-généré
 
-## License
+# 4. Arrêter l'application
+docker compose down --remove-orphans
+```
 
-Symfony Docker is available under the MIT License.
+## 🎨 Architecture
 
-## Credits
+### Rôles et Permissions
 
-Created by [Kévin Dunglas](https://dunglas.dev), co-maintained by [Maxime Helias](https://twitter.com/maxhelias) and sponsored by [Les-Tilleuls.coop](https://les-tilleuls.coop).
+| Rôle | Couleur | Accès |
+|------|--------|-------|
+| **Admin** 🔵 | Bleu | EasyAdmin - Gestion complète du système |
+| **Médecin** 🟢 | Vert | Patients, Dossiers, Consultations, Greffes |
+| **Patient** 🟠 | Orange | Consultation de son dossier, notes médicales |
+
+### Stack Technique
+
+- **Framework** : Symfony 7.0
+- **Base de Données** : MySQL 8.0
+- **Serveur Web** : FrankenPHP + Caddy
+- **Template Engine** : Twig
+- **Admin Panel** : EasyAdmin
+- **CSS** : Bootstrap 5.3 + CSS personnalisé centralisé
+- **Frontend** : Stimulus JS + Asset Mapper
+
+### Structure du Projet
+
+```
+src/
+├── Controller/          # Contrôleurs (Admin, Médecin, Patient)
+├── Entity/              # Entités Doctrine (Utilisateur, Patient, Dossier, etc.)
+├── Repository/          # Requêtes personnalisées
+└── Security/            # Authentification et autorisations
+
+templates/
+├── admin/               # Interface administrateur (EasyAdmin)
+├── medecin/             # Interface médecin (Patients, Dossiers)
+└── home/medecin/        # Dashboard et Consultations
+
+assets/styles/
+├── layouts.css          # Navbars, layouts (color-coded)
+├── cards.css            # Composants card
+├── forms.css            # Formulaires
+├── global.css           # Boutons, tables, badges
+└── consultations.css    # Pages consultations
+```
+
+## 👤 Authentification
+
+### Créer un Admin
+```bash
+docker compose exec php bin/console app:create-admin
+```
+
+### Accès Défaut
+- **Admin** : https://localhost/admin
+- **Médecin** : https://localhost/ (après authentification)
+- **Patient** : https://localhost/ (après authentification)
+
+## 📚 Fonctionnalités
+
+### Pour l'Administrateur
+- 👥 Gestion des Logins (email + mot de passe)
+- 👤 Gestion des Utilisateurs (civiles, profils)
+- 🏷️ Gestion des Profils (rôles et permissions)
+- 🏥 Gestion des Patients
+- 💊 Gestion des Greffes
+
+### Pour le Médecin
+- 👥 Liste et détails des patients
+- 📁 Gestion des dossiers patient
+- 📋 Enregistrement des consultations
+- 💉 Suivi des greffes
+- 📝 Notes médicales
+
+### Pour le Patient
+- 📄 Consultation de son dossier
+- 📋 Historique des consultations
+- 📊 État de la greffe
+
+## 🎨 Styling
+
+Tous les styles sont **centralisés** dans `assets/styles/` :
+- ❌ Pas de `<style>` inline dans les templates
+- ❌ Pas d'attributs `style=` dans le HTML
+- ✅ Classe CSS génériques et réutilisables
+- ✅ Système de couleurs contextuel (admin/médecin/patient)
+
+### Classes Principales
+```twig
+<div class="admin">      <!-- Applique couleurs bleues -->
+<div class="medecin">    <!-- Applique couleurs vertes -->
+<div class="patient">    <!-- Applique couleurs oranges -->
+```
+
+## 🔧 Commandes Utiles
+
+```bash
+# Lancer les tests
+docker compose exec php bin/phpunit
+
+# Générer les migrations
+docker compose exec php bin/console make:migration
+
+# Exécuter les migrations
+docker compose exec php bin/console doctrine:migrations:migrate
+
+# Accéder au shell PHP
+docker compose exec php bash
+
+# Voir les logs
+docker compose logs -f php
+```
+
+## 📖 Documentation Complémentaire
+
+- [Guide EasyAdmin](aides/docs/easyadmin-guide.md)
+- [Implémentation Médecin](aides/IMPLEMENTATION_MEDECIN.md)
+- [Implémentation Dossier Patient](aides/IMPLEMENTATION_DOSSIER_PATIENT.md)
+- [Documentation Greffe](aides/DOCUMENTATION_DOSSIER_GREFFE.md)
+- [Checklist Médecin](aides/CHECKLIST_MEDECIN.md)
+
+## 🛠️ Configuration
+
+### Variables d'Environnement
+
+Voir `.env.local` pour :
+- `DATABASE_URL` : Connexion MySQL
+- `MAILER_DSN` : Configuration email
+- `APP_SECRET` : Clé secrète Symfony
+
+### Docker Compose
+
+- `compose.yaml` : Configuration de développement
+- `compose.prod.yaml` : Configuration production
+- `compose.override.yaml` : Surcharges locales
+
+## 📝 Licence
+
+Propriétaire - Institut de Greffe de Foie Limoges (IGFL)
+
+## 👥 Équipe
+
+Projet académique - BTS Informatique (2ème année)
