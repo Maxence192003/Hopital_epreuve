@@ -1,0 +1,83 @@
+{% extends '@medecin/layout_dossiers.html.twig' %}
+
+{% block main %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2>Créer un Dossier Patient</h2>
+            <p class="text-muted">Patient: <strong>{{ utilisateur.prenom }} {{ utilisateur.nom }}</strong></p>
+            
+            <form method="POST" class="mt-4">
+                <!-- Informations du Patient -->
+                <h5 class="mt-4 mb-3">Informations Civiles</h5>
+                
+                <div class="form-group mb-3">
+                    <label class="form-label">Nom</label>
+                    <input type="text" class="form-control" value="{{ utilisateur.nom }}" disabled>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Prénom</label>
+                    <input type="text" class="form-control" value="{{ utilisateur.prenom }}" disabled>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Ville</label>
+                    <input type="text" class="form-control" value="{{ utilisateur.villeRes }}" disabled>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Code Postal</label>
+                    <input type="text" class="form-control" value="{{ utilisateur.CP }}" disabled>
+                </div>
+
+                <!-- Informations du Dossier -->
+                <h5 class="mt-4 mb-3">Informations Dossier</h5>
+                
+                <div class="form-group mb-3">
+                    <label for="date_naissance" class="form-label">Date de Naissance</label>
+                    <input type="date" id="date_naissance" name="date_naissance" class="form-control">
+                    <small class="form-text text-muted">Optionnel</small>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="etat_greffe" class="form-label">État de la Greffe</label>
+                    <select id="etat_greffe" name="etat_greffe" class="form-select">
+                        <option value="">-- Aucun État --</option>
+                        <option value="En attente">En attente</option>
+                        <option value="Greffer">Greffer</option>
+                        <option value="Bon">Bon</option>
+                        <option value="Mauvais">Mauvais</option>
+                    </select>
+                    <small class="form-text text-muted">Optionnel</small>
+                </div>
+
+                <!-- Boutons -->
+                <div class="d-flex gap-2 mt-4">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-save"></i> Créer le Dossier
+                    </button>
+                    <a href="{{ path('medecin_dossiers_creer_liste') }}" class="btn btn-secondary">Annuler</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .text-danger {
+        color: #dc3545;
+    }
+    
+    .form-label {
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+    }
+    
+    h5 {
+        color: #333;
+        border-bottom: 2px solid #667eea;
+        padding-bottom: 0.5rem;
+    }
+</style>
+{% endblock %}

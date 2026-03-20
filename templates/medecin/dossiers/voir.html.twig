@@ -1,0 +1,134 @@
+{% extends '@medecin/layout_dossiers.html.twig' %}
+
+{% block main %}
+<div class="container mt-5">
+
+    <!-- Titre -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <h2><i class="fas fa-file-alt"></i> Détails du Dossier</h2>
+            <p class="text-muted">Patient: <strong>{{ utilisateur.prenom }} {{ utilisateur.nom }}</strong></p>
+        </div>
+    </div>
+
+    <!-- Informations Civiles -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Informations Civiles</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Nom:</strong> {{ utilisateur.nom }}</p>
+                    <p><strong>Prénom:</strong> {{ utilisateur.prenom }}</p>
+                    <p><strong>Ville:</strong> {{ utilisateur.villeRes }}</p>
+                    <p><strong>Code Postal:</strong> {{ utilisateur.CP }}</p>
+                    <p><strong>Email:</strong> {{ utilisateur.login.mail }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">Informations Dossier</h5>
+                </div>
+                <div class="card-body">
+                    <p>
+                        <strong>Date de Naissance:</strong> 
+                        {% if dossier.dateNaissance %}
+                            {{ dossier.dateNaissance|date('d/m/Y') }}
+                        {% else %}
+                            <em class="text-muted">Non renseignée</em>
+                        {% endif %}
+                    </p>
+                    <p>
+                        <strong>État de la Greffe:</strong>
+                        {% if dossier.etatGreffe %}
+                            <span class="badge bg-success">{{ dossier.etatGreffe }}</span>
+                        {% else %}
+                            <span class="badge bg-secondary">Aucun État</span>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Greffes -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0">Greffes Associées</h5>
+                </div>
+                <div class="card-body">
+                    {% if dossier.greffes|length == 0 %}
+                        <p class="text-muted"><em>Aucune greffe associée</em></p>
+                    {% else %}
+                        {% for greffe in dossier.greffes %}
+                        <div class="mb-3 p-3 border rounded">
+                            <p><strong>Date de Greffe:</strong> 
+                                {% if greffe.dateGreffe %}
+                                    {{ greffe.dateGreffe|date('d/m/Y H:i') }}
+                                {% else %}
+                                    Non renseignée
+                                {% endif %}
+                            </p>
+                            <p><strong>Note Greffe:</strong> 
+                                {% if greffe.noteGreffe %}
+                                    {{ greffe.noteGreffe|nl2br }}
+                                {% else %}
+                                    <em class="text-muted">Non renseignée</em>
+                                {% endif %}
+                            </p>
+                            <p><strong>Note Donneur:</strong> 
+                                {% if greffe.noteDonneur %}
+                                    {{ greffe.noteDonneur|nl2br }}
+                                {% else %}
+                                    <em class="text-muted">Non renseignée</em>
+                                {% endif %}
+                            </p>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notes Médicales -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-danger text-white">
+                    <h5 class="mb-0">Notes Médicales</h5>
+                </div>
+                <div class="card-body">
+                    {% if dossier.notesMedicales|length == 0 %}
+                        <p class="text-muted"><em>Aucune note médicale</em></p>
+                    {% else %}
+                        {% for note in dossier.notesMedicales %}
+                        <div class="mb-3 p-3 border rounded">
+                            <p><strong>Note:</strong> {{ note.textNoteMedical|nl2br }}</p>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Boutons -->
+    <div class="row">
+        <div class="col-md-12">
+            <a href="{{ path('medecin_dossier_modifier', {id: dossier.idDossierPatient}) }}" class="btn btn-warning">
+                <i class="fas fa-edit"></i> Modifier l'État
+            </a>
+            <a href="{{ path('medecin_dossiers_index') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Retour
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

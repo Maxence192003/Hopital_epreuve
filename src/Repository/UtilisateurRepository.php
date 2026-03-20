@@ -15,4 +15,17 @@ class UtilisateurRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Utilisateur::class);
     }
+
+    /**
+     * Récupère les utilisateurs ayant un profil avec un rôle spécifique
+     */
+    public function findByRoleName(string $roleName): array
+    {
+        return $this->createQueryBuilder('u')
+            ->join('u.profil', 'p')
+            ->where('p.Role = :role')
+            ->setParameter('role', $roleName)
+            ->getQuery()
+            ->getResult();
+    }
 }

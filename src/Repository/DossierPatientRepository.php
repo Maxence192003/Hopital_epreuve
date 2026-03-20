@@ -33,4 +33,16 @@ class DossierPatientRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    /**
+     * Récupère un DossierPatient pour un Utilisateur donné
+     */
+    public function findByUtilisateur($utilisateur): ?DossierPatient
+    {
+        return $this->createQueryBuilder('d')
+            ->where('d.utilisateur = :utilisateur')
+            ->setParameter('utilisateur', $utilisateur)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }
