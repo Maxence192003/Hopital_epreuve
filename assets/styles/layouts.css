@@ -1,0 +1,108 @@
+/* ============================================
+   LAYOUTS - Common styles for layouts
+   ============================================ */
+
+body {
+    background-color: #f5f7fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+/* Default gradient */
+.navbar-dark {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+/* Navbar Admin - Bleu */
+.navbar-admin {
+    background: linear-gradient(135deg, #0056b3 0%, #003d82 100%) !important;
+}
+
+/* Navbar Médecin - Vert */
+.navbar-medecin {
+    background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%) !important;
+}
+
+/* Navbar Patient - Orange */
+.navbar-patient {
+    background: linear-gradient(135deg, #fd7e14 0%, #e0630b 100%) !important;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: #fff;
+    border-right: 1px solid #e9ecef;
+    min-height: calc(100vh - 56px);
+    padding: 20px 0;
+}
+
+.sidebar .nav-link {
+    color: #495057;
+    border-left: 3px solid transparent;
+    padding: 12px 20px;
+    transition: all 0.3s ease;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #f8f9fa;
+    color: #667eea;
+    border-left-color: #667eea;
+}
+
+.sidebar .nav-link.active {
+    background-color: #f0f1ff;
+    color: #667eea;
+    border-left-color: #667eea;
+    font-weight: 500;
+}
+
+/* Admin - Colors */
+.admin .sidebar .nav-link:hover {
+    color: #0056b3;
+    border-left-color: #0056b3;
+}
+
+.admin .sidebar .nav-link.active {
+    background-color: #e7f1ff;
+    color: #0056b3;
+    border-left-color: #0056b3;
+}
+
+/* Médecin - Colors */
+.medecin .sidebar .nav-link:hover {
+    color: #28a745;
+    border-left-color: #28a745;
+}
+
+.medecin .sidebar .nav-link.active {
+    background-color: #e8f5e9;
+    color: #28a745;
+    border-left-color: #28a745;
+}
+
+/* Patient - Colors */
+.patient .sidebar .nav-link:hover {
+    color: #fd7e14;
+    border-left-color: #fd7e14;
+}
+
+.patient .sidebar .nav-link.active {
+    background-color: #fff3e0;
+    color: #fd7e14;
+    border-left-color: #fd7e14;
+}
+
+/* Main Content */
+.main-content {
+    padding: 30px;
+    background-color: #f5f7fa;
+}

@@ -1,0 +1,69 @@
+/* ============================================
+   FORMS - Form component styles
+   ============================================ */
+
+.text-danger {
+    color: #dc3545;
+}
+
+.form-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+.form-textarea {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    min-height: 150px;
+    resize: vertical;
+}
+
+.form-textarea:focus {
+    outline: none;
+    border-color: #ffc107;
+    box-shadow: 0 0 5px rgba(255, 193, 7, 0.3);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+h5 {
+    color: #333;
+    border-bottom: 2px solid #667eea;
+    padding-bottom: 0.5rem;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+/* Admin - Form colors */
+.admin h5 {
+    border-bottom-color: #0056b3;
+}
+
+/* Médecin - Form colors */
+.medecin h5 {
+    border-bottom-color: #28a745;
+}
+
+/* Patient - Form colors */
+.patient h5 {
+    border-bottom-color: #fd7e14;
+}

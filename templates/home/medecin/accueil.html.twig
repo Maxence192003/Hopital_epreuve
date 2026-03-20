@@ -3,6 +3,7 @@
 {% block title %}Tableau de bord Médecin - IGFL{% endblock %}
 
 {% block body %}
+<div class="medecin">
 <div class="medecin-container">
     <!-- Header Médecin -->
     <header class="medecin-header">
@@ -55,7 +56,7 @@
                     <div class="medecin-card-icon">👨‍⚕️</div>
                     <h3>Consultations</h3>
                     <p>Gérer les consultations avec vos patients</p>
-                    <button class="medecin-card-btn" disabled>Bientôt disponible</button>
+                    <a href="{{ path('medecin_consultations') }}" class="medecin-card-btn">Accéder</a>
                 </div>
 
                 <!-- Calendrier -->
@@ -74,5 +75,6 @@
             </footer>
         </div>
     </main>
+</div>
 </div>
 {% endblock %}

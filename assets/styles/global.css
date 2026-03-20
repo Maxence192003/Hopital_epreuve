@@ -1,0 +1,98 @@
+/* ============================================
+   GLOBAL - Global components and utilities
+   ============================================ */
+
+h2 {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #667eea;
+    border-color: #667eea;
+}
+
+.btn-primary:hover {
+    background-color: #5568d3;
+    border-color: #5568d3;
+}
+
+/* Admin - Button colors */
+.admin .btn-primary {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.admin .btn-primary:hover {
+    background-color: #003d82;
+    border-color: #003d82;
+}
+
+/* Médecin - Button colors */
+.medecin .btn-primary {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.medecin .btn-primary:hover {
+    background-color: #1e7e34;
+    border-color: #1e7e34;
+}
+
+/* Patient - Button colors */
+.patient .btn-primary {
+    background-color: #fd7e14;
+    border-color: #fd7e14;
+}
+
+.patient .btn-primary:hover {
+    background-color: #e0630b;
+    border-color: #e0630b;
+}
+
+/* Tables */
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #f8f9ff;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f0f1ff;
+}
+
+.btn-group-sm {
+    gap: 0.25rem;
+}
+
+.btn-group-sm .btn {
+    padding: 4px 8px;
+    font-size: 0.75rem;
+}
+
+/* Badge */
+.badge {
+    padding: 6px 12px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* Forms specific */
+.form-select-sm {
+    font-size: 0.875rem;
+}
+
+/* Accordion */
+.accordion-button:not(.collapsed) {
+    background-color: #e7f3ff;
+    color: #0c63e4;
+}
+
+.accordion-body {
+    border-top: 1px solid #dee2e6;
+}
+
+/* Inline form display */
+.form-inline-display {
+    display: inline;
+}

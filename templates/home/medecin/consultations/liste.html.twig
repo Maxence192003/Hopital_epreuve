@@ -1,0 +1,73 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Consultations - IGFL{% endblock %}
+
+{% block body %}
+<div class="patient">
+<div class="medecin-container">
+    <!-- Header -->
+    <header class="medecin-header">
+        <div class="medecin-header-content">
+            <div class="medecin-logo">
+                <h1>👨‍⚕️ Consultations</h1>
+                <p>Gérer les consultations avec vos patients</p>
+            </div>
+            <a href="{{ path('app_medecin_accueil') }}" class="medecin-logout-btn">← Retour</a>
+        </div>
+    </header>
+
+    <main class="medecin-main">
+        <div class="medecin-dashboard">
+            
+            <!-- Barre de Recherche -->
+            <section class="search-section">
+                <h2>Rechercher un patient</h2>
+                <form method="GET" class="search-form">
+                    <input 
+                        type="text" 
+                        name="search" 
+                        class="search-input"
+                        placeholder="Rechercher par email, prénom, nom..."
+                        value="{{ search }}"
+                    />
+                    <button type="submit" class="search-btn">🔍 Rechercher</button>
+                </form>
+            </section>
+
+            <!-- Liste des Patients -->
+            <section class="patients-section">
+                <h2>Patients ({{ dossiers|length }})</h2>
+                
+                {% if dossiers|length > 0 %}
+                    <div class="patients-list">
+                        {% for dossier in dossiers %}
+                            <div class="patient-card">
+                                <div class="patient-info">
+                                    <h3>{{ dossier.utilisateur.prenom }} {{ dossier.utilisateur.nom|upper }}</h3>
+                                    <p><strong>Email :</strong> {{ dossier.utilisateur.login.mail }}</p>
+                                    <p><strong>État greffe :</strong> {{ dossier.etatGreffe ?? 'Non défini' }}</p>
+                                    <p><strong>Ville :</strong> {{ dossier.utilisateur.villeRes }}</p>
+                                </div>
+                                <a 
+                                    href="{{ path('medecin_consultation_detail', {id: dossier.idDossierPatient}) }}" 
+                                    class="medecin-card-btn"
+                                >
+                                    Consulter →
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="no-results">Aucun patient trouvé{% if search %} pour "{{ search }}"{% endif %}</p>
+                {% endif %}
+            </section>
+
+            <footer class="medecin-footer">
+                <p>&copy; 2026 Institut de Greffe de Foie Limoges. Espace médecin réservé.</p>
+            </footer>
+        </div>
+    </main>
+</div>
+</div>
+
+{% endblock %}

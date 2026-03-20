@@ -1,0 +1,118 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Consultation {{ dossier.utilisateur.prenom }} - IGFL{% endblock %}
+
+{% block body %}
+<div class="patient">
+<div class="medecin-container">
+    <!-- Header -->
+    <header class="medecin-header">
+        <div class="medecin-header-content">
+            <div class="medecin-logo">
+                <h1>📋 Consultation - {{ dossier.utilisateur.prenom }} {{ dossier.utilisateur.nom|upper }}</h1>
+                <p>Gestion de la consultation</p>
+            </div>
+            <a href="{{ path('medecin_consultations') }}" class="medecin-logout-btn">← Retour aux consultations</a>
+        </div>
+    </header>
+
+    <main class="medecin-main">
+        <div class="medecin-dashboard">
+            
+            <!-- Fiche Patient -->
+            <section class="patient-details">
+                <h2>📌 Informations Patient</h2>
+                <div class="details-grid">
+                    <div class="detail-item">
+                        <strong>Prénom :</strong>
+                        <span>{{ dossier.utilisateur.prenom }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Nom :</strong>
+                        <span>{{ dossier.utilisateur.nom|upper }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Email :</strong>
+                        <span>{{ dossier.utilisateur.login.mail }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Ville :</strong>
+                        <span>{{ dossier.utilisateur.villeRes }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Code Postal :</strong>
+                        <span>{{ dossier.utilisateur.cp }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>État Greffe :</strong>
+                        <span>{{ dossier.etatGreffe ?? 'Non défini' }}</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Notes Médicales Existantes -->
+            <section class="notes-section">
+                <h2>📝 Notes Médicales ({{ notes|length }})</h2>
+                
+                {% if notes|length > 0 %}
+                    <div class="notes-list">
+                        {% for note in notes|reverse %}
+                            <div class="note-card">
+                                <button class="note-toggle" onclick="toggleNote(this)">
+                                    <span class="toggle-icon">▶</span>
+                                    <span class="note-date">
+                                        📅 {{ note.createdAt ? note.createdAt|format_datetime(locale='fr', pattern="d MMMM Y 'à' HH:mm") : 'Date inconnue' }}
+                                    </span>
+                                </button>
+                                <div class="note-content hidden">
+                                    <div class="note-text">
+                                        {{ note.textNoteMedical }}
+                                    </div>
+                                    <div class="note-id">
+                                        ID: {{ note.idNote }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="no-notes">Aucune note médicale pour ce patient</p>
+                {% endif %}
+            </section>
+
+            <!-- Formulaire Ajouter Note -->
+            <section class="add-note-section">
+                <h2>✍️ Ajouter une Note Médicale</h2>
+                <form method="POST" action="{{ path('medecin_consultation_add_note', {id: dossier.idDossierPatient}) }}" class="note-form">
+                    <div class="form-group">
+                        <label for="texte_note">Contenu de la note :</label>
+                        <textarea 
+                            id="texte_note"
+                            name="texte_note"
+                            class="form-textarea"
+                            placeholder="Entrez votre note médicale..."
+                            required
+                        ></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">💾 Enregistrer la note</button>
+                </form>
+            </section>
+
+            <footer class="medecin-footer">
+                <p>&copy; 2026 Institut de Greffe de Foie Limoges. Espace médecin réservé.</p>
+            </footer>
+        </div>
+    </main>
+</div>
+
+<script>
+function toggleNote(button) {
+    const content = button.nextElementSibling;
+    const isHidden = content.style.display === 'none';
+    
+    content.style.display = isHidden ? 'block' : 'none';
+    button.setAttribute('aria-expanded', isHidden);
+}
+</script>
+</div>
+{% endblock %}

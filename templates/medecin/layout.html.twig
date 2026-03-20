@@ -5,123 +5,7 @@
 {% block stylesheets %}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f5f7fa;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        .navbar {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            box-shadow: 0 2px 4px rgba(0,0,0,.1);
-        }
-        
-        .navbar-brand {
-            font-weight: bold;
-            font-size: 1.5rem;
-        }
-        
-        .sidebar {
-            background-color: #fff;
-            border-right: 1px solid #e9ecef;
-            min-height: calc(100vh - 56px);
-            padding: 20px 0;
-        }
-        
-        .sidebar .nav-link {
-            color: #495057;
-            border-left: 3px solid transparent;
-            padding: 12px 20px;
-            transition: all 0.3s ease;
-        }
-        
-        .sidebar .nav-link:hover {
-            background-color: #f8f9fa;
-            color: #667eea;
-            border-left-color: #667eea;
-        }
-        
-        .sidebar .nav-link.active {
-            background-color: #f0f1ff;
-            color: #667eea;
-            border-left-color: #667eea;
-            font-weight: 500;
-        }
-        
-        .main-content {
-            padding: 30px;
-            background-color: #f5f7fa;
-        }
-        
-        .card {
-            border: none;
-            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-            border-radius: 8px;
-        }
-        
-        .card-header {
-            border-radius: 8px 8px 0 0 !important;
-        }
-        
-        h2 {
-            color: #333;
-            font-weight: 600;
-            margin-bottom: 25px;
-        }
-        
-        h5 {
-            color: #333;
-            border-bottom: 2px solid #667eea;
-            padding-bottom: 0.5rem;
-            margin-top: 25px;
-            margin-bottom: 15px;
-        }
-        
-        .btn-primary {
-            background-color: #667eea;
-            border-color: #667eea;
-        }
-        
-        .btn-primary:hover {
-            background-color: #5568d3;
-            border-color: #5568d3;
-        }
-        
-        .table-striped > tbody > tr:nth-of-type(odd) {
-            background-color: #f8f9ff;
-        }
-        
-        .table-hover tbody tr:hover {
-            background-color: #f0f1ff;
-        }
-        
-        .badge {
-            padding: 6px 12px;
-            font-size: 0.875rem;
-            font-weight: 500;
-        }
-        
-        .text-danger {
-            color: #dc3545;
-        }
-        
-        .form-label {
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-            color: #333;
-        }
-        
-        .form-control:focus,
-        .form-select:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
-        }
-        
-        .btn-group-sm .btn {
-            padding: 4px 8px;
-            font-size: 0.75rem;
-        }
-    </style>
+
 {% endblock %}
 
 {% block javascripts %}
@@ -130,7 +14,8 @@
 {% endblock %}
 
 {% block body %}
-<nav class="navbar navbar-expand-lg navbar-dark">
+<div class="medecin">
+<nav class="navbar navbar-expand-lg navbar-dark navbar-medecin">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ path('app_medecin_accueil') }}">
             <i class="fas fa-hospital"></i> Médecin
@@ -176,5 +61,6 @@
             {% block main %}{% endblock %}
         </main>
     </div>
+</div>
 </div>
 {% endblock %}

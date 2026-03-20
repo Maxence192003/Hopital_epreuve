@@ -54,7 +54,7 @@
                                 <a href="{{ path('admin_utilisateur_modifier', {id: utilisateur.idUtilisateur}) }}" class="btn btn-warning" title="Modifier">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <form method="POST" action="{{ path('admin_utilisateur_supprimer', {id: utilisateur.idUtilisateur}) }}" style="display: inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">
+                                <form method="POST" action="{{ path('admin_utilisateur_supprimer', {id: utilisateur.idUtilisateur}) }}" class="form-inline-display" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">
                                     <button type="submit" class="btn btn-danger btn-sm" title="Supprimer">
                                         <i class="fas fa-trash"></i>
                                     </button>
@@ -69,13 +69,4 @@
     {% endif %}
 </div>
 
-<style>
-    .btn-group-sm {
-        gap: 0.25rem;
-    }
-    
-    .table-hover tbody tr:hover {
-        background-color: #f5f5f5;
-    }
-</style>
 {% endblock %}

@@ -45,4 +45,20 @@ class DossierPatientRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    /**
+     * Recherche les dossiers par email, prénom ou nom du patient
+     */
+    public function findBySearchConsultation(string $search): array
+    {
+        return $this->createQueryBuilder('d')
+            ->leftJoin('d.utilisateur', 'u')
+            ->leftJoin('u.login', 'l')
+            ->where('u.nom LIKE :search')
+            ->orWhere('u.prenom LIKE :search')
+            ->orWhere('l.mail LIKE :search')
+            ->setParameter('search', '%' . $search . '%')
+            ->getQuery()
+            ->getResult();
+    }
 }

@@ -44,7 +44,7 @@
                                 <a href="{{ path('medecin_patients_modifier', {id: patient.idUtilisateur}) }}" class="btn btn-warning" title="Modifier">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <form method="POST" action="{{ path('medecin_patients_supprimer', {id: patient.idUtilisateur}) }}" style="display: inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce patient ?');">
+                                <form method="POST" action="{{ path('medecin_patients_supprimer', {id: patient.idUtilisateur}) }}" class="form-inline-display" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce patient ?');">
                                     <button type="submit" class="btn btn-danger btn-sm" title="Supprimer">
                                         <i class="fas fa-trash"></i>
                                     </button>
