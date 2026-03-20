@@ -21,20 +21,20 @@ class DossierPatient
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $Etat_greffe = null;
 
-    #[ORM\ManyToOne(targetEntity: NoteMedical::class, inversedBy: 'dossierPatients')]
-    #[ORM\JoinColumn(name: 'id_note', referencedColumnName: 'id_note', nullable: false)]
-    private ?NoteMedical $noteMedical = null;
+    #[ORM\OneToOne(targetEntity: Utilisateur::class, inversedBy: 'dossierPatient', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(name: 'id_utilisateur', referencedColumnName: 'id_utilisateur', nullable: true)]
+    private ?Utilisateur $utilisateur = null;
 
-    #[ORM\ManyToOne(targetEntity: Greffe::class, inversedBy: 'dossierPatients')]
-    #[ORM\JoinColumn(name: 'id_greffe', referencedColumnName: 'id_greffe', nullable: true)]
-    private ?Greffe $greffe = null;
+    #[ORM\OneToMany(mappedBy: 'dossierPatient', targetEntity: NoteMedical::class, cascade: ['persist', 'remove'])]
+    private Collection $notesMedicales;
 
-    #[ORM\OneToMany(mappedBy: 'dossierPatient', targetEntity: Utilisateur::class)]
-    private Collection $utilisateurs;
+    #[ORM\OneToMany(mappedBy: 'dossierPatient', targetEntity: Greffe::class, cascade: ['persist', 'remove'])]
+    private Collection $greffes;
 
     public function __construct()
     {
-        $this->utilisateurs = new ArrayCollection();
+        $this->notesMedicales = new ArrayCollection();
+        $this->greffes = new ArrayCollection();
     }
 
     public function getIdDossierPatient(): ?string
@@ -73,53 +73,70 @@ class DossierPatient
         return $this;
     }
 
-    public function getNoteMedical(): ?NoteMedical
+    public function getUtilisateur(): ?Utilisateur
     {
-        return $this->noteMedical;
+        return $this->utilisateur;
     }
 
-    public function setNoteMedical(?NoteMedical $noteMedical): static
+    public function setUtilisateur(?Utilisateur $utilisateur): static
     {
-        $this->noteMedical = $noteMedical;
-
-        return $this;
-    }
-
-    public function getGreffe(): ?Greffe
-    {
-        return $this->greffe;
-    }
-
-    public function setGreffe(?Greffe $greffe): static
-    {
-        $this->greffe = $greffe;
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, Utilisateur>
+     * @return Collection<int, NoteMedical>
      */
-    public function getUtilisateurs(): Collection
+    public function getNotesMedicales(): Collection
     {
-        return $this->utilisateurs;
+        return $this->notesMedicales;
     }
 
-    public function addUtilisateur(Utilisateur $utilisateur): static
+    public function addNoteMedicale(NoteMedical $noteMedicale): static
     {
-        if (!$this->utilisateurs->contains($utilisateur)) {
-            $this->utilisateurs->add($utilisateur);
-            $utilisateur->setDossierPatient($this);
+        if (!$this->notesMedicales->contains($noteMedicale)) {
+            $this->notesMedicales->add($noteMedicale);
+            $noteMedicale->setDossierPatient($this);
         }
 
         return $this;
     }
 
-    public function removeUtilisateur(Utilisateur $utilisateur): static
+    public function removeNoteMedicale(NoteMedical $noteMedicale): static
     {
-        if ($this->utilisateurs->removeElement($utilisateur)) {
-            if ($utilisateur->getDossierPatient() === $this) {
-                $utilisateur->setDossierPatient(null);
+        if ($this->notesMedicales->removeElement($noteMedicale)) {
+            if ($noteMedicale->getDossierPatient() === $this) {
+                $noteMedicale->setDossierPatient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Greffe>
+     */
+    public function getGreffes(): Collection
+    {
+        return $this->greffes;
+    }
+
+    public function addGreffe(Greffe $greffe): static
+    {
+        if (!$this->greffes->contains($greffe)) {
+            $this->greffes->add($greffe);
+            $greffe->setDossierPatient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGreffe(Greffe $greffe): static
+    {
+        if ($this->greffes->removeElement($greffe)) {
+            if ($greffe->getDossierPatient() === $this) {
+                $greffe->setDossierPatient(null);
             }
         }
 

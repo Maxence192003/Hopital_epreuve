@@ -30,25 +30,30 @@ final class CreateAdminCommand extends Command
         $login->setMail('admin@hopital.fr');
         $login->setPassword($hasher);
         
-        // Create Utilisateur
+        // Create or get Profil first
+        $profil = $this->entityManager->getRepository(Profil::class)
+            ->findOneBy(['Role' => 'ROLE_ADMIN']);
+        
+        if (!$profil) {
+            $profil = new Profil();
+            $profil->setRole('ROLE_ADMIN');
+            $this->entityManager->persist($profil);
+            $this->entityManager->flush();
+        }
+        
+        // Create Utilisateur with Profil
         $utilisateur = new Utilisateur();
         $utilisateur->setNom('Admin');
         $utilisateur->setPrenom('Admin');
         $utilisateur->setVilleRes('Limoges');
         $utilisateur->setCP('87000');
         $utilisateur->setLogin($login);
+        $utilisateur->setProfil($profil);
         $login->addUtilisateur($utilisateur);
-        
-        // Create Profil
-        $profil = new Profil();
-        $profil->setRole('ROLE_ADMIN');
-        $profil->setUtilisateur($utilisateur);
-        $utilisateur->addProfil($profil);
         
         // Persist
         $this->entityManager->persist($login);
         $this->entityManager->persist($utilisateur);
-        $this->entityManager->persist($profil);
         $this->entityManager->flush();
         
         $output->writeln('Admin user created successfully!');

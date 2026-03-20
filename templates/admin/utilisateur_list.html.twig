@@ -42,8 +42,8 @@
                         <td>{{ utilisateur.CP }}</td>
                         <td>{{ utilisateur.login.mail }}</td>
                         <td>
-                            {% if utilisateur.profils|length > 0 %}
-                                <span class="badge bg-info">{{ utilisateur.profils.first.role }}</span>
+                            {% if utilisateur.profil %}
+                                <span class="badge bg-info">{{ utilisateur.profil.role }}</span>
                             {% endif %}
                         </td>
                         <td>

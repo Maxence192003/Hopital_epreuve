@@ -1,14 +1,10 @@
-{% extends '@admin/layout.html.twig' %}
-
-{% block content_title %}
-    Modifier l'Utilisateur
-{% endblock %}
+{% extends '@medecin/layout.html.twig' %}
 
 {% block main %}
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <h2>Modifier {{ utilisateur.prenom }} {{ utilisateur.nom }}</h2>
+            <h2>Modifier {{ patient.prenom }} {{ patient.nom }}</h2>
             
             <form method="POST" class="mt-4">
                 <!-- Données Civiles -->
@@ -16,22 +12,22 @@
                 
                 <div class="form-group mb-3">
                     <label for="nom" class="form-label">Nom <span class="text-danger">*</span></label>
-                    <input type="text" id="nom" name="nom" class="form-control" value="{{ utilisateur.nom }}" required>
+                    <input type="text" id="nom" name="nom" class="form-control" value="{{ patient.nom }}" required>
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="prenom" class="form-label">Prénom <span class="text-danger">*</span></label>
-                    <input type="text" id="prenom" name="prenom" class="form-control" value="{{ utilisateur.prenom }}" required>
+                    <input type="text" id="prenom" name="prenom" class="form-control" value="{{ patient.prenom }}" required>
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="ville_res" class="form-label">Ville <span class="text-danger">*</span></label>
-                    <input type="text" id="ville_res" name="ville_res" class="form-control" value="{{ utilisateur.villeRes }}" required>
+                    <input type="text" id="ville_res" name="ville_res" class="form-control" value="{{ patient.villeRes }}" required>
                 </div>
 
                 <div class="form-group mb-3">
                     <label for="cp" class="form-label">Code Postal <span class="text-danger">*</span></label>
-                    <input type="text" id="cp" name="cp" class="form-control" value="{{ utilisateur.CP }}" required>
+                    <input type="text" id="cp" name="cp" class="form-control" value="{{ patient.CP }}" required>
                 </div>
 
                 <!-- Authentification -->
@@ -39,7 +35,7 @@
                 
                 <div class="form-group mb-3">
                     <label for="mail" class="form-label">Email <span class="text-danger">*</span></label>
-                    <input type="email" id="mail" name="mail" class="form-control" value="{{ utilisateur.login.mail }}" required>
+                    <input type="email" id="mail" name="mail" class="form-control" value="{{ patient.login.mail }}" required>
                 </div>
 
                 <div class="form-group mb-3">
@@ -48,25 +44,12 @@
                     <small class="form-text text-muted">Laissez vide pour conserver le mot de passe actuel. Sinon, entrez un nouveau (minimum 6 caractères)</small>
                 </div>
 
-                <!-- Rôle -->
-                <h5 class="mt-4 mb-3">Rôle</h5>
-                
-                <div class="form-group mb-3">
-                    <label for="role" class="form-label">Rôle <span class="text-danger">*</span></label>
-                    <select id="role" name="role" class="form-select" required>
-                        <option value="">-- Sélectionnez un rôle --</option>
-                        <option value="ROLE_ADMIN" {% if utilisateur.profil.role == 'ROLE_ADMIN' %}selected{% endif %}>ROLE_ADMIN</option>
-                        <option value="ROLE_MEDECIN" {% if utilisateur.profil.role == 'ROLE_MEDECIN' %}selected{% endif %}>ROLE_MEDECIN</option>
-                        <option value="ROLE_PATIENT" {% if utilisateur.profil.role == 'ROLE_PATIENT' %}selected{% endif %}>ROLE_PATIENT</option>
-                    </select>
-                </div>
-
                 <!-- Boutons -->
                 <div class="d-flex gap-2 mt-4">
                     <button type="submit" class="btn btn-warning">
                         <i class="fas fa-save"></i> Enregistrer les modifications
                     </button>
-                    <a href="{{ path('admin_utilisateur_liste') }}" class="btn btn-secondary">Annuler</a>
+                    <a href="{{ path('medecin_patients_liste') }}" class="btn btn-secondary">Annuler</a>
                 </div>
             </form>
         </div>

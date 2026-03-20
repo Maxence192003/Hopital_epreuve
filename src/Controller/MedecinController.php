@@ -15,8 +15,15 @@ class MedecinController extends AbstractController
     public function accueil(): Response
     {
         $user = $this->getUser();
+        
+        // $user est un Login avec une OneToMany vers Utilisateur
         $utilisateurs = $user->getUtilisateurs();
-        $medecin = $utilisateurs->first() ?? null;
+        
+        // Récupère le premier utilisateur associé au login
+        $medecin = null;
+        if (!$utilisateurs->isEmpty()) {
+            $medecin = $utilisateurs->first();
+        }
         
         return $this->render('home/medecin/accueil.html.twig', [
             'medecin' => $medecin,

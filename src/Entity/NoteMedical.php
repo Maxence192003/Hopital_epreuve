@@ -17,12 +17,12 @@ class NoteMedical
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $Text_note_medical = null;
 
-    #[ORM\OneToMany(mappedBy: 'noteMedical', targetEntity: DossierPatient::class)]
-    private Collection $dossierPatients;
+    #[ORM\ManyToOne(targetEntity: DossierPatient::class, inversedBy: 'notesMedicales')]
+    #[ORM\JoinColumn(name: 'id_dossier_patient', referencedColumnName: 'id_dossier_patient', nullable: false)]
+    private ?DossierPatient $dossierPatient = null;
 
     public function __construct()
     {
-        $this->dossierPatients = new ArrayCollection();
     }
 
     public function getIdNote(): ?string
@@ -49,31 +49,14 @@ class NoteMedical
         return $this;
     }
 
-    /**
-     * @return Collection<int, DossierPatient>
-     */
-    public function getDossierPatients(): Collection
+    public function getDossierPatient(): ?DossierPatient
     {
-        return $this->dossierPatients;
+        return $this->dossierPatient;
     }
 
-    public function addDossierPatient(DossierPatient $dossierPatient): static
+    public function setDossierPatient(?DossierPatient $dossierPatient): static
     {
-        if (!$this->dossierPatients->contains($dossierPatient)) {
-            $this->dossierPatients->add($dossierPatient);
-            $dossierPatient->setNoteMedical($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDossierPatient(DossierPatient $dossierPatient): static
-    {
-        if ($this->dossierPatients->removeElement($dossierPatient)) {
-            if ($dossierPatient->getNoteMedical() === $this) {
-                $dossierPatient->setNoteMedical(null);
-            }
-        }
+        $this->dossierPatient = $dossierPatient;
 
         return $this;
     }

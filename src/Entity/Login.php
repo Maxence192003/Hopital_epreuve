@@ -105,17 +105,20 @@ class Login implements UserInterface, PasswordAuthenticatedUserInterface
         $roles = [];
         
         // Récupère tous les utilisateurs associés à ce login
-        foreach ($this->utilisateurs as $utilisateur) {
-            // Récupère tous les profils de cet utilisateur
-            foreach ($utilisateur->getProfils() as $profil) {
-                $role = $profil->getRole();
-                if ($role && !in_array($role, $roles)) {
-                    $roles[] = $role;
+        // Utilise la collection chargée par Doctrine
+        if (!$this->utilisateurs->isEmpty()) {
+            foreach ($this->utilisateurs as $utilisateur) {
+                // Récupère le profil de cet utilisateur
+                if ($utilisateur->getProfil()) {
+                    $role = $utilisateur->getProfil()->getRole();
+                    if ($role && !in_array($role, $roles)) {
+                        $roles[] = $role;
+                    }
                 }
             }
         }
         
-        // Ajoute ROLE_USER par défaut
+        // Ajoute ROLE_USER par défaut si aucun rôle trouvé
         if (empty($roles)) {
             $roles[] = 'ROLE_USER';
         }
@@ -128,4 +131,3 @@ class Login implements UserInterface, PasswordAuthenticatedUserInterface
         // Efface les données sensibles si besoin
     }
 }
-

@@ -26,13 +26,18 @@ class LoginRepository extends ServiceEntityRepository
 
     public function findOneByMail(string $mail): ?Login
     {
-        return $this->createQueryBuilder('l')
-            ->leftJoin('l.utilisateurs', 'u')
+        // Utilise une sous-requête pour trouver le Login avec un Utilisateur associé
+        $qb = $this->createQueryBuilder('l');
+        
+        return $qb
             ->addSelect('u')
-            ->leftJoin('u.profils', 'p')
             ->addSelect('p')
+            ->innerJoin('l.utilisateurs', 'u')  // INNER JOIN pour avoir au moins 1 utilisateur
+            ->leftJoin('u.profil', 'p')
             ->where('l.Mail = :mail')
             ->setParameter('mail', $mail)
+            ->orderBy('l.id_login', 'DESC')  // Prend le plus récent
+            ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
     }

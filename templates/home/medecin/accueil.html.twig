@@ -12,7 +12,11 @@
                 <p>Tableau de bord médecin</p>
             </div>
             <div class="medecin-user-info">
-                <span class="medecin-welcome">Bienvenue, Dr. {{ medecin.prenom }} {{ medecin.nom|upper }}</span>
+                {% if medecin %}
+                    <span class="medecin-welcome">Bienvenue, Dr. {{ medecin.prenom }} {{ medecin.nom|upper }}</span>
+                {% else %}
+                    <span class="medecin-welcome">Bienvenue, Docteur</span>
+                {% endif %}
                 <a href="{{ path('app_logout') }}" class="medecin-logout-btn">Se déconnecter</a>
             </div>
         </div>
@@ -35,7 +39,7 @@
                     <div class="medecin-card-icon">👥</div>
                     <h3>Patients</h3>
                     <p>Consultez la liste de vos patients</p>
-                    <a href="#" class="medecin-card-btn">Accéder</a>
+                    <a href="{{ path('medecin_patients_liste') }}" class="medecin-card-btn">Accéder</a>
                 </div>
 
                 <!-- Dossiers Patients -->

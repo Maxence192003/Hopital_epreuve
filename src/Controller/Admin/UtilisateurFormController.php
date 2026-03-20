@@ -53,21 +53,24 @@ class UtilisateurFormController extends AbstractController
             $em->persist($login);
             $em->flush();
 
-            // Créer l'Utilisateur
+            // Créer ou récupérer le Profil
+            $profil = $em->getRepository(Profil::class)->findOneBy(['Role' => $data['role']]);
+            if (!$profil) {
+                $profil = new Profil();
+                $profil->setRole($data['role']);
+                $em->persist($profil);
+                $em->flush();
+            }
+
+            // Créer l'Utilisateur avec le Profil
             $utilisateur = new Utilisateur();
             $utilisateur->setNom($data['nom']);
             $utilisateur->setPrenom($data['prenom']);
             $utilisateur->setVilleRes($data['ville_res']);
             $utilisateur->setCP($data['cp']);
             $utilisateur->setLogin($login);
+            $utilisateur->setProfil($profil);
             $em->persist($utilisateur);
-            $em->flush();
-
-            // Créer le Profil
-            $profil = new Profil();
-            $profil->setRole($data['role']);
-            $profil->setUtilisateur($utilisateur);
-            $em->persist($profil);
             $em->flush();
 
             $this->addFlash('success', 'Utilisateur créé avec succès !');
@@ -102,8 +105,8 @@ class UtilisateurFormController extends AbstractController
             $utilisateur->setCP($data['cp']);
 
             // Modifier le Profil
-            if ($utilisateur->getProfils()->count() > 0) {
-                $utilisateur->getProfils()->first()->setRole($data['role']);
+            if ($utilisateur->getProfil()) {
+                $utilisateur->getProfil()->setRole($data['role']);
             }
 
             // Modifier le Login si email ou password ont changé

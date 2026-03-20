@@ -32,8 +32,7 @@ class Utilisateur
     #[Assert\NotBlank(message: 'Le code postal ne peut pas être vide')]
     private ?string $CP = null;
 
-    #[ORM\ManyToOne(targetEntity: DossierPatient::class, inversedBy: 'utilisateurs')]
-    #[ORM\JoinColumn(name: 'id_dossier_patient', referencedColumnName: 'id_dossier_patient', nullable: true)]
+    #[ORM\OneToOne(targetEntity: DossierPatient::class, mappedBy: 'utilisateur')]
     private ?DossierPatient $dossierPatient = null;
 
     #[ORM\ManyToOne(targetEntity: Login::class, inversedBy: 'utilisateurs')]
@@ -41,13 +40,13 @@ class Utilisateur
     #[Assert\NotNull(message: 'Un utilisateur doit avoir un login')]
     private ?Login $login = null;
 
-    #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: Profil::class, cascade: ['remove'])]
-    #[Assert\Count(min: 1, minMessage: 'Un utilisateur doit avoir au moins un profil')]
-    private Collection $profils;
+    #[ORM\ManyToOne(targetEntity: Profil::class, inversedBy: 'utilisateurs')]
+    #[ORM\JoinColumn(name: 'id_profil', referencedColumnName: 'id_profil', nullable: false)]
+    #[Assert\NotNull(message: 'Un utilisateur doit avoir un profil')]
+    private ?Profil $profil = null;
 
     public function __construct()
     {
-        $this->profils = new ArrayCollection();
     }
 
     public function getIdUtilisateur(): ?int
@@ -127,31 +126,14 @@ class Utilisateur
         return $this;
     }
 
-    /**
-     * @return Collection<int, Profil>
-     */
-    public function getProfils(): Collection
+    public function getProfil(): ?Profil
     {
-        return $this->profils;
+        return $this->profil;
     }
 
-    public function addProfil(Profil $profil): static
+    public function setProfil(?Profil $profil): static
     {
-        if (!$this->profils->contains($profil)) {
-            $this->profils->add($profil);
-            $profil->setUtilisateur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProfil(Profil $profil): static
-    {
-        if ($this->profils->removeElement($profil)) {
-            if ($profil->getUtilisateur() === $this) {
-                $profil->setUtilisateur(null);
-            }
-        }
+        $this->profil = $profil;
 
         return $this;
     }

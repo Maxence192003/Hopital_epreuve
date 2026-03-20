@@ -2,6 +2,7 @@ twig:
     file_name_pattern: '*.twig'
     paths:
         '%kernel.project_dir%/templates/admin': admin
+        '%kernel.project_dir%/templates/medecin': medecin
 
 when@test:
     twig:

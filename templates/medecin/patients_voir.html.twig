@@ -1,0 +1,100 @@
+{% extends '@medecin/layout.html.twig' %}
+
+{% block main %}
+<div class="container mt-5">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2>Détails du Patient</h2>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="{{ path('medecin_patients_modifier', {id: patient.idUtilisateur}) }}" class="btn btn-warning">
+                <i class="fas fa-edit"></i> Modifier
+            </a>
+            <a href="{{ path('medecin_patients_liste') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Retour
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Informations Civiles</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <strong>Nom:</strong> {{ patient.nom }}
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Prénom:</strong> {{ patient.prenom }}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <strong>Ville:</strong> {{ patient.villeRes }}
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Code Postal:</strong> {{ patient.CP }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Authentification</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <strong>Email:</strong> {{ patient.login.mail }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Rôle</h5>
+                </div>
+                <div class="card-body">
+                    {% if patient.profil %}
+                        <span class="badge bg-info">{{ patient.profil.role }}</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        border: none;
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        border-radius: 8px;
+    }
+    
+    .card-header {
+        border-radius: 8px 8px 0 0 !important;
+        font-weight: 600;
+    }
+    
+    .card-header h5 {
+        color: white;
+        border: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    h2 {
+        color: #333;
+        font-weight: 600;
+    }
+    
+    strong {
+        color: #333;
+    }
+</style>
+{% endblock %}

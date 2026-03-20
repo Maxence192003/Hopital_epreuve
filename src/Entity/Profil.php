@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProfilRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -18,10 +20,13 @@ class Profil
     #[Assert\NotBlank(message: 'Le rôle ne peut pas être vide')]
     private ?string $Role = null;
 
-    #[ORM\ManyToOne(targetEntity: Utilisateur::class, inversedBy: 'profils')]
-    #[ORM\JoinColumn(name: 'id_utilisateur', referencedColumnName: 'id_utilisateur', nullable: false)]
-    #[Assert\NotNull(message: 'Un profil doit être associé à un utilisateur')]
-    private ?Utilisateur $utilisateur = null;
+    #[ORM\OneToMany(mappedBy: 'profil', targetEntity: Utilisateur::class)]
+    private Collection $utilisateurs;
+
+    public function __construct()
+    {
+        $this->utilisateurs = new ArrayCollection();
+    }
 
     public function getIdProfil(): ?int
     {
@@ -40,14 +45,31 @@ class Profil
         return $this;
     }
 
-    public function getUtilisateur(): ?Utilisateur
+    /**
+     * @return Collection<int, Utilisateur>
+     */
+    public function getUtilisateurs(): Collection
     {
-        return $this->utilisateur;
+        return $this->utilisateurs;
     }
 
-    public function setUtilisateur(?Utilisateur $utilisateur): static
+    public function addUtilisateur(Utilisateur $utilisateur): static
     {
-        $this->utilisateur = $utilisateur;
+        if (!$this->utilisateurs->contains($utilisateur)) {
+            $this->utilisateurs->add($utilisateur);
+            $utilisateur->setProfil($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUtilisateur(Utilisateur $utilisateur): static
+    {
+        if ($this->utilisateurs->removeElement($utilisateur)) {
+            if ($utilisateur->getProfil() === $this) {
+                $utilisateur->setProfil(null);
+            }
+        }
 
         return $this;
     }

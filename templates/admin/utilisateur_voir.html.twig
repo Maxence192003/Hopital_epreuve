@@ -75,8 +75,8 @@
                     <h5 class="mb-0">Rôles et Permissions</h5>
                 </div>
                 <div class="card-body">
-                    {% if utilisateur.profils|length > 0 %}
-                        {% for profil in utilisateur.profils %}
+                    {% if utilisateur.profil %}
+                        {% set profil = utilisateur.profil %}
                         <div class="mb-2">
                             <span class="badge bg-primary">{{ profil.role }}</span>
                         </div>
