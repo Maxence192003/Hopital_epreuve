@@ -35,7 +35,7 @@ class DossierPatientCrudController extends AbstractController
             }
         }
         
-        return $this->render('medecin/dossiers/index.html.twig', [
+        return $this->render('home/medecin/medecin/dossiers/index.html.twig', [
             'dossiers' => $dossiersAvecUtilisateur,
             'section' => 'dossiers',
         ]);
@@ -52,7 +52,7 @@ class DossierPatientCrudController extends AbstractController
             return $this->redirectToRoute('medecin_dossiers_index');
         }
 
-        return $this->render('medecin/dossiers/voir.html.twig', [
+        return $this->render('home/medecin/medecin/dossiers/voir.html.twig', [
             'dossier' => $dossier,
             'utilisateur' => $dossier->getUtilisateur(),
         ]);
@@ -88,7 +88,7 @@ class DossierPatientCrudController extends AbstractController
             return $this->redirectToRoute('medecin_dossiers_index');
         }
 
-        return $this->render('medecin/dossiers/modifier.html.twig', [
+        return $this->render('home/medecin/medecin/dossiers/modifier.html.twig', [
             'dossier' => $dossier,
             'utilisateur' => $dossier->getUtilisateur(),
         ]);
@@ -120,7 +120,7 @@ class DossierPatientCrudController extends AbstractController
             }
         }
 
-        return $this->render('medecin/dossiers/creer_liste.html.twig', [
+        return $this->render('home/medecin/medecin/dossiers/creer_liste.html.twig', [
             'patients' => $patientsSansDossier,
             'section' => 'creer',
         ]);
@@ -168,7 +168,7 @@ class DossierPatientCrudController extends AbstractController
             return $this->redirectToRoute('medecin_dossiers_index');
         }
 
-        return $this->render('medecin/dossiers/creer.html.twig', [
+        return $this->render('home/medecin/medecin/dossiers/creer.html.twig', [
             'utilisateur' => $utilisateur,
         ]);
     }
@@ -188,7 +188,7 @@ class DossierPatientCrudController extends AbstractController
             }
         }
 
-        return $this->render('medecin/dossiers/sans_greffe_liste.html.twig', [
+        return $this->render('home/medecin/medecin/dossiers/sans_greffe_liste.html.twig', [
             'dossiers' => $dossiersSansGreffe,
             'section' => 'sans_greffe',
         ]);
@@ -244,7 +244,7 @@ class DossierPatientCrudController extends AbstractController
             return $this->redirectToRoute('medecin_dossiers_sans_greffe');
         }
 
-        return $this->render('medecin/dossiers/ajouter_greffe.html.twig', [
+        return $this->render('home/medecin/medecin/dossiers/ajouter_greffe.html.twig', [
             'dossier' => $dossier,
             'utilisateur' => $dossier->getUtilisateur(),
         ]);

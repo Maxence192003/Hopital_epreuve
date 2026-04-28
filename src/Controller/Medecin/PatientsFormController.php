@@ -38,7 +38,7 @@ class PatientsFormController extends AbstractController
             ->getQuery()
             ->getResult();
 
-        return $this->render('medecin/patients_list.html.twig', [
+        return $this->render('home/medecin/medecin/patients_list.html.twig', [
             'patients' => $patients
         ]);
     }
@@ -61,7 +61,7 @@ class PatientsFormController extends AbstractController
             throw $this->createAccessDeniedException('Accès refusé');
         }
 
-        return $this->render('medecin/patients_voir.html.twig', [
+        return $this->render('home/medecin/medecin/patients_voir.html.twig', [
             'patient' => $patient
         ]);
     }
@@ -119,7 +119,7 @@ class PatientsFormController extends AbstractController
             return $this->redirectToRoute('medecin_patients_liste');
         }
 
-        return $this->render('medecin/patients_form.html.twig', [
+        return $this->render('home/medecin/medecin/patients_form.html.twig', [
             'title' => 'Ajouter un patient'
         ]);
     }
@@ -172,7 +172,7 @@ class PatientsFormController extends AbstractController
             return $this->redirectToRoute('medecin_patients_liste');
         }
 
-        return $this->render('medecin/patients_modifier.html.twig', [
+        return $this->render('home/medecin/medecin/patients_modifier.html.twig', [
             'patient' => $patient
         ]);
     }

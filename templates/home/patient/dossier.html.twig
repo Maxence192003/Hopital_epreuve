@@ -1,0 +1,80 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Mon dossier medical - IGFL{% endblock %}
+
+{% block body %}
+<div class="patient-container">
+    <header class="patient-header">
+        <div class="patient-header-content">
+            <div class="patient-logo">
+                <h1>📋 Mon dossier medical</h1>
+                <p>Consultation de votre dossier personnel</p>
+            </div>
+            <a href="{{ path('app_patient_accueil') }}" class="patient-logout-btn">← Retour a l'accueil</a>
+        </div>
+    </header>
+
+    <main class="patient-main">
+        <div class="patient-dashboard">
+            <section class="patient-welcome-section">
+                <h2>{{ patient.prenom }} {{ patient.nom|upper }}</h2>
+                <p>Retrouvez ici les informations principales de votre dossier medical.</p>
+            </section>
+
+            <section class="patient-details">
+                <h2>Informations personnelles</h2>
+                <div class="details-grid">
+                    <div class="detail-item">
+                        <strong>Email :</strong>
+                        <span>{{ patient.login.mail }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Ville :</strong>
+                        <span>{{ patient.villeRes }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Code postal :</strong>
+                        <span>{{ patient.cp }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Date de naissance :</strong>
+                        <span>{{ dossier.dateNaissance ? dossier.dateNaissance|date('d/m/Y') : 'Non renseignee' }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Etat de greffe :</strong>
+                        <span>{{ dossier.etatGreffe ?? 'Non defini' }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Identifiant dossier :</strong>
+                        <span>{{ dossier.idDossierPatient }}</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="notes-section">
+                <h2>Notes medicales ({{ notes|length }})</h2>
+                {% if notes|length > 0 %}
+                    <div class="notes-list">
+                        {% for note in notes|reverse %}
+                            <div class="note-card">
+                                <div class="note-content" style="display: block;">
+                                    <div class="note-date">
+                                        📅 {{ note.createdAt ? note.createdAt|format_datetime(locale='fr', pattern="d MMMM Y 'a' HH:mm") : 'Date inconnue' }}
+                                    </div>
+                                    <div class="note-text">{{ note.textNoteMedical }}</div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="no-notes">Aucune note medicale n'est encore disponible.</p>
+                {% endif %}
+            </section>
+
+            <footer class="patient-footer">
+                <p>&copy; 2026 Institut de Greffe de Foie Limoges. Espace patient reserve.</p>
+            </footer>
+        </div>
+    </main>
+</div>
+{% endblock %}

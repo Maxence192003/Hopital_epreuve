@@ -36,7 +36,7 @@ class DossierGreffeController extends AbstractController
             }
         }
         
-        return $this->render('medecin/dossiers_greffe_liste.html.twig', [
+        return $this->render('home/medecin/medecin/dossiers_greffe_liste.html.twig', [
             'dossiers' => $dossiersAvecUtilisateur,
         ]);
     }
@@ -71,7 +71,7 @@ class DossierGreffeController extends AbstractController
             return $this->redirectToRoute('medecin_dossiers_greffe_liste');
         }
 
-        return $this->render('medecin/dossiers_greffe_modifier.html.twig', [
+        return $this->render('home/medecin/medecin/dossiers_greffe_modifier.html.twig', [
             'dossier' => $dossier,
             'utilisateur' => $dossier->getUtilisateur(),
         ]);
