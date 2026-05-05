@@ -38,15 +38,11 @@ class PatientController extends AbstractController
 
         $dossier = $dossierRepository->findByUtilisateur($patient);
 
-        if (!$dossier) {
-            throw $this->createNotFoundException('Aucun dossier medical n\'est associe a ce patient.');
-        }
-
         return $this->render('home/patient/dossier.html.twig', [
             'patient' => $patient,
             'dossier' => $dossier,
-            'notes' => $dossier->getNotesMedicales(),
-            'greffes' => $dossier->getGreffes(),
+            'notes' => $dossier ? $dossier->getNotesMedicales() : [],
+            'greffes' => $dossier ? $dossier->getGreffes() : [],
         ]);
     }
 }

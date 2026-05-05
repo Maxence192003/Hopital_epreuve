@@ -5,6 +5,7 @@ namespace App\Controller\Medecin;
 use App\Entity\Login;
 use App\Entity\Profil;
 use App\Entity\Utilisateur;
+use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use PasswordHasher;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,19 +28,14 @@ class PatientsFormController extends AbstractController
      * List all patients (users with ROLE_PATIENT)
      */
     #[Route('/liste', name: 'medecin_patients_liste', methods: ['GET'])]
-    public function liste(): Response
+    public function liste(Request $request, UtilisateurRepository $utilisateurRepository): Response
     {
-        $patients = $this->entityManager->getRepository(Utilisateur::class)
-            ->createQueryBuilder('u')
-            ->leftJoin('u.profil', 'p')
-            ->where('p.Role = :role')
-            ->setParameter('role', 'ROLE_PATIENT')
-            ->orderBy('u.Nom', 'ASC')
-            ->getQuery()
-            ->getResult();
+        $search = trim((string) $request->query->get('search', ''));
+        $patients = $utilisateurRepository->findPatientsBySearch($search);
 
         return $this->render('home/medecin/medecin/patients_list.html.twig', [
-            'patients' => $patients
+            'patients' => $patients,
+            'search' => $search,
         ]);
     }
 

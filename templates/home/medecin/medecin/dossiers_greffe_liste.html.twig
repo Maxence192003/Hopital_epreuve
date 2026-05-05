@@ -9,6 +9,24 @@
         </div>
     </div>
 
+    <form method="get" action="{{ path('medecin_dossiers_greffe_liste') }}" class="row g-2 mb-4">
+        <div class="col-md-9">
+            <input
+                type="text"
+                name="search"
+                class="form-control"
+                placeholder="Rechercher par dossier, nom, prénom, email ou état"
+                value="{{ search|default('') }}"
+            >
+        </div>
+        <div class="col-md-3 d-flex gap-2">
+            <button type="submit" class="btn btn-outline-primary flex-fill">Rechercher</button>
+            {% if search is defined and search is not empty %}
+                <a href="{{ path('medecin_dossiers_greffe_liste') }}" class="btn btn-outline-secondary">Réinitialiser</a>
+            {% endif %}
+        </div>
+    </form>
+
     {% for message in app.flashes('success') %}
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <i class="fas fa-check-circle"></i> {{ message }}
@@ -25,7 +43,12 @@
 
     {% if dossiers|length == 0 %}
         <div class="alert alert-info">
-            <i class="fas fa-info-circle"></i> Aucun patient avec dossier trouvé.
+            <i class="fas fa-info-circle"></i>
+            {% if search is defined and search is not empty %}
+                Aucun dossier patient ne correspond à votre recherche.
+            {% else %}
+                Aucun patient avec dossier trouvé.
+            {% endif %}
         </div>
     {% else %}
         <div class="table-responsive">

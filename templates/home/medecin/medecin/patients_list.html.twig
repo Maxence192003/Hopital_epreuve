@@ -11,9 +11,31 @@
         </div>
     </div>
 
+    <form method="get" action="{{ path('medecin_patients_liste') }}" class="row g-2 mb-4">
+        <div class="col-md-9">
+            <input
+                type="text"
+                name="search"
+                class="form-control"
+                placeholder="Rechercher par nom, prénom ou email"
+                value="{{ search|default('') }}"
+            >
+        </div>
+        <div class="col-md-3 d-flex gap-2">
+            <button type="submit" class="btn btn-outline-primary flex-fill">Rechercher</button>
+            {% if search is defined and search is not empty %}
+                <a href="{{ path('medecin_patients_liste') }}" class="btn btn-outline-secondary">Réinitialiser</a>
+            {% endif %}
+        </div>
+    </form>
+
     {% if patients|length == 0 %}
         <div class="alert alert-info">
-            Aucun patient créé. <a href="{{ path('medecin_patients_creer') }}">Créer le premier patient</a>
+            {% if search is defined and search is not empty %}
+                Aucun patient ne correspond à votre recherche.
+            {% else %}
+                Aucun patient créé. <a href="{{ path('medecin_patients_creer') }}">Créer le premier patient</a>
+            {% endif %}
         </div>
     {% else %}
         <div class="table-responsive">

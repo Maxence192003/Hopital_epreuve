@@ -23,20 +23,14 @@ class DossierPatientCrudController extends AbstractController
      * SECTION 1 : Liste des dossiers patients (avec DossierPatient)
      */
     #[Route('', name: 'medecin_dossiers_index')]
-    public function index(DossierPatientRepository $repository): Response
+    public function index(Request $request, DossierPatientRepository $repository): Response
     {
-        // Récupère tous les DossierPatient qui ont un utilisateur associé
-        $tousLesDossiers = $repository->findAll();
-        $dossiersAvecUtilisateur = [];
-        
-        foreach ($tousLesDossiers as $dossier) {
-            if ($dossier->getUtilisateur() !== null) {
-                $dossiersAvecUtilisateur[] = $dossier;
-            }
-        }
+        $search = trim((string) $request->query->get('search', ''));
+        $dossiersAvecUtilisateur = $repository->findDossiersGreffeBySearch($search);
         
         return $this->render('home/medecin/medecin/dossiers/index.html.twig', [
             'dossiers' => $dossiersAvecUtilisateur,
+            'search' => $search,
             'section' => 'dossiers',
         ]);
     }

@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Login;
 use App\Entity\Utilisateur;
 use App\Entity\Profil;
+use App\Repository\UtilisateurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,20 +19,26 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class UtilisateurFormController extends AbstractController
 {
     #[Route('/admin/utilisateur-liste', name: 'admin_utilisateur_liste', methods: ['GET'])]
-    public function liste(EntityManagerInterface $em): Response
+    public function liste(Request $request, UtilisateurRepository $utilisateurRepository): Response
     {
-        $utilisateurs = $em->getRepository(Utilisateur::class)->findAll();
+        $search = trim((string) $request->query->get('search', ''));
+        $utilisateurs = $utilisateurRepository->findUtilisateursBySearch($search);
+
         return $this->render('admin/utilisateur_list.html.twig', [
-            'utilisateurs' => $utilisateurs
+            'utilisateurs' => $utilisateurs,
+            'search' => $search,
         ]);
     }
 
     #[Route('/admin/utilisateur', name: 'admin_utilisateur_index', methods: ['GET'])]
-    public function index(EntityManagerInterface $em): Response
+    public function index(Request $request, UtilisateurRepository $utilisateurRepository): Response
     {
-        $utilisateurs = $em->getRepository(Utilisateur::class)->findAll();
+        $search = trim((string) $request->query->get('search', ''));
+        $utilisateurs = $utilisateurRepository->findUtilisateursBySearch($search);
+
         return $this->render('admin/utilisateur_list.html.twig', [
-            'utilisateurs' => $utilisateurs
+            'utilisateurs' => $utilisateurs,
+            'search' => $search,
         ]);
     }
 

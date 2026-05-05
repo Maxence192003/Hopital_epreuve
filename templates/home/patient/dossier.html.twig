@@ -21,6 +21,12 @@
                 <p>Retrouvez ici les informations principales de votre dossier medical.</p>
             </section>
 
+            {% if not dossier %}
+                <section class="patient-details">
+                    <div class="alert alert-info">Votre dossier est vide.</div>
+                </section>
+            {% else %}
+
             <section class="patient-details">
                 <h2>Informations personnelles</h2>
                 <div class="details-grid">
@@ -70,6 +76,7 @@
                     <p class="no-notes">Aucune note medicale n'est encore disponible.</p>
                 {% endif %}
             </section>
+            {% endif %}
 
             <footer class="patient-footer">
                 <p>&copy; 2026 Institut de Greffe de Foie Limoges. Espace patient reserve.</p>

@@ -16,28 +16,14 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class DossierGreffeController extends AbstractController
 {
     #[Route('', name: 'medecin_dossiers_greffe_liste')]
-    public function liste(DossierPatientRepository $repository): Response
+    public function liste(Request $request, DossierPatientRepository $repository): Response
     {
-        // Récupère tous les DossierPatient qui ont un utilisateur associé
-        $dossiers = $repository->findBy(
-            ['utilisateur' => null],
-            ['id_dossier_patient' => 'ASC'],
-            null,
-            null
-        );
-        
-        // Récupère les dossiers qui ont un utilisateur
-        $tousLesDossiers = $repository->findAll();
-        $dossiersAvecUtilisateur = [];
-        
-        foreach ($tousLesDossiers as $dossier) {
-            if ($dossier->getUtilisateur() !== null) {
-                $dossiersAvecUtilisateur[] = $dossier;
-            }
-        }
+        $search = trim((string) $request->query->get('search', ''));
+        $dossiers = $repository->findDossiersGreffeBySearch($search);
         
         return $this->render('home/medecin/medecin/dossiers_greffe_liste.html.twig', [
-            'dossiers' => $dossiersAvecUtilisateur,
+            'dossiers' => $dossiers,
+            'search' => $search,
         ]);
     }
 

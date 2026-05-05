@@ -54,10 +54,29 @@ class DossierPatientRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('d')
             ->leftJoin('d.utilisateur', 'u')
             ->leftJoin('u.login', 'l')
-            ->where('u.nom LIKE :search')
-            ->orWhere('u.prenom LIKE :search')
-            ->orWhere('l.mail LIKE :search')
+            ->where('u.Nom LIKE :search')
+            ->orWhere('u.Prenom LIKE :search')
+            ->orWhere('l.Mail LIKE :search')
             ->setParameter('search', '%' . $search . '%')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findDossiersGreffeBySearch(?string $search = null): array
+    {
+        $queryBuilder = $this->createQueryBuilder('d')
+            ->leftJoin('d.utilisateur', 'u')
+            ->leftJoin('u.login', 'l')
+            ->where('d.utilisateur IS NOT NULL')
+            ->orderBy('u.Nom', 'ASC');
+
+        if ($search !== null && $search !== '') {
+            $queryBuilder
+                ->andWhere('d.id_dossier_patient LIKE :search OR u.Nom LIKE :search OR u.Prenom LIKE :search OR l.Mail LIKE :search OR d.Etat_greffe LIKE :search')
+                ->setParameter('search', '%' . $search . '%');
+        }
+
+        return $queryBuilder
             ->getQuery()
             ->getResult();
     }

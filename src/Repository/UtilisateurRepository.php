@@ -28,4 +28,42 @@ class UtilisateurRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findPatientsBySearch(?string $search = null): array
+    {
+        $queryBuilder = $this->createQueryBuilder('u')
+            ->leftJoin('u.profil', 'p')
+            ->leftJoin('u.login', 'l')
+            ->where('p.Role = :role')
+            ->setParameter('role', 'ROLE_PATIENT')
+            ->orderBy('u.Nom', 'ASC');
+
+        if ($search !== null && $search !== '') {
+            $queryBuilder
+                ->andWhere('u.Nom LIKE :search OR u.Prenom LIKE :search OR l.Mail LIKE :search')
+                ->setParameter('search', '%' . $search . '%');
+        }
+
+        return $queryBuilder
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findUtilisateursBySearch(?string $search = null): array
+    {
+        $queryBuilder = $this->createQueryBuilder('u')
+            ->leftJoin('u.profil', 'p')
+            ->leftJoin('u.login', 'l')
+            ->orderBy('u.Nom', 'ASC');
+
+        if ($search !== null && $search !== '') {
+            $queryBuilder
+                ->andWhere('u.Nom LIKE :search OR u.Prenom LIKE :search OR u.Ville_res LIKE :search OR u.CP LIKE :search OR l.Mail LIKE :search OR p.Role LIKE :search')
+                ->setParameter('search', '%' . $search . '%');
+        }
+
+        return $queryBuilder
+            ->getQuery()
+            ->getResult();
+    }
 }
