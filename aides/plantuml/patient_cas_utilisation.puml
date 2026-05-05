@@ -1,0 +1,23 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam actorStyle awesome
+
+actor Patient
+
+rectangle "Application web de suivi hospitalier" {
+  usecase "S'authentifier" as UC1
+  usecase "Consulter ses informations\npersonnelles" as UC2
+  usecase "Consulter son dossier\nmédical" as UC3
+  usecase "Consulter les notes\nmédicales" as UC4
+  usecase "Consulter l'historique\ndes greffes" as UC5
+}
+
+Patient -- UC1
+Patient -- UC2
+Patient -- UC3
+Patient -- UC4
+Patient -- UC5
+
+@enduml
