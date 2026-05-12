@@ -16,6 +16,10 @@
 {$CADDY_EXTRA_CONFIG}
 
 {$SERVER_NAME:localhost} {
+	tls internal {
+		curves x25519 secp256r1
+	}
+
 	log {
 		{$CADDY_SERVER_LOG_OPTIONS}
 		# Redact the authorization query parameter that can be set by Mercure

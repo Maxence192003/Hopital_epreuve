@@ -7,6 +7,12 @@ generated in the Caddy container is not trusted by your local machine.
 
 You must add the authority to the trust store of the host.
 
+Important: the local Caddy authority is stored in the Docker volume
+used by the php service. If you run `docker compose down -v`, this
+authority is deleted and a new root certificate is generated on the next
+startup. In that case, you must export and trust the new `root.crt`
+again on the client machine.
+
 <!-- markdownlint-disable MD013 -->
 
 ### Linux
@@ -25,6 +31,12 @@ docker cp $(docker compose ps -q php):/data/caddy/pki/authorities/local/root.crt
 
 ```console
 docker compose cp php:/data/caddy/pki/authorities/local/root.crt %TEMP%/root.crt && certutil -addstore -f "ROOT" %TEMP%/root.crt
+```
+
+To inspect the currently generated certificate before importing it:
+
+```console
+docker compose cp php:/data/caddy/pki/authorities/local/root.crt %TEMP%/root.crt && certutil -dump %TEMP%/root.crt
 ```
 
 <!-- markdownlint-enable MD013 -->
